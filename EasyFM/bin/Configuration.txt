@@ -1,0 +1,53 @@
+RUNENAME|POIDS|BONUS|CATID|SUBCATID|BONUSNAME|COLOR|
+Ine|1|1|1|1|en Intelligence|D46A51|
+Fo|1|1|1|2|en Force|99D39B|
+Cha|1|1|1|3|à la Chance|74B0F2|
+Age|1|1|1|4|en Agilité|D6DA8B|
+Vi|1|3|1|5|en Vitalité|F0F0F2|
+Sa|3|1|1|6|en Sagesse|B7B8BB|
+Pa Ine|3|3|1|1|en Intelligence|D46A51|
+Pa Fo|3|3|1|2|en Force|99D39B|
+Pa Cha|3|3|1|3|à la Chance|74B0F2|
+Pa Age|3|3|1|4|en Agilité|D6DA8B|
+Pa Vi|3|10|1|5|en Vitalité|F0F0F2|
+Pa Sa|9|3|1|6|en Sagesse|B7B8BB|
+Ra Ine|10|10|1|1|en Intelligence|D46A51|
+Ra Fo|10|10|1|2|en Force|99D39B|
+Ra Cha|10|10|1|3|à la Chance|74B0F2|
+Ra Age|10|10|1|4|en Agilité|D6DA8B|
+Ra Vi|10|30|1|5|en Vitalité|F0F0F2|
+Ra Sa|30|10|1|6|en Sagesse|B7B8BB|
+Ré Feu|6|1|2|1|de résistance Feu|FF0000|
+Ré Terre|6|1|2|1|de résistance Terre|9EB73E|
+Ré Eau|6|1|2|1|de résistance Eau|628786|
+Ré Air|6|1|2|1|de résistance Air|E5E0C2|
+Ré Neutre|6|1|2|2|de résistance Neutre|717964|
+Ré Per Feu|5|1|2|2|% de résistance Feu|F29200|
+Ré Per Terre|5|1|2|2|% de résistance Terre|70CE99|
+Ré Per Eau|5|1|2|2|% de résistance Eau|65A7F1|
+Ré Per Air|5|1|2|2|% de résistance Air|DAD08B|
+Ré Per Neutre|5|1|2|2|% de résistance Neutre|4E636D|
+Prospe|3|1|4|3|en Prospection|E6B800|
+Pa Prospe|9|3|4|3|en Prospection|E6B800|
+Do Per|2|1|4|1|% de dommages|43372C|
+Pa Do Per|6|3|4|1|% de dommages|43372C|
+Ra Do Per|20|10|4|1|% de dommages|43372C|
+Ini|1|10|4|2|en Initiative|AC9757|
+Pa Ini|3|30|4|2|en Initiative|AC9757|
+Ra Ini|10|100|4|2|en Initiative|AC9757|
+Pod|1|10|5|1|aux Pods|D5A82C|
+Pa Pod|3|30|5|1|aux Pods|D5A82C|
+Ra Pod|10|100|5|1|aux Pods|D5A82C|
+Ga PA|100|1|3|1|PA|F8A814|
+Ga PM|90|1|3|2|PM|1AB807|
+PO|51|1|3|3|à la Portée|5D0F24|
+Soin|20|1|3|4|de Soins|F53333|
+Do|20|1|3|5|de Dommages|3E7571|
+Invo|30|1|3|6|créatures invocables|007339|
+Cri|30|1|3|7|aux Coups Critiques|D41702|
+Do Pi|15|1|5|1|de dommages aux pièges|5B6F91|
+Pa Do Pi|45|3|5|1|de dommages aux pièges|5B6F91|
+Pi Per|2|1|5|2|% de dommages aux pièges|58C787|
+Pa Pi Per|6|3|5|2|% de dommages aux pièges|58C787|
+Ra Pi Per|20|10|5|2|% de dommages aux pièges|58C787|
+Do Ren|NULL|1|5|2|aux renvois dommages|977900|
