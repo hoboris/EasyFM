@@ -6,8 +6,8 @@
 #AutoIt3Wrapper_Res_Language=1036
 #AutoIt3Wrapper_Res_Field=Nom (short)|EasyFM
 #AutoIt3Wrapper_Res_Field=Nom (long)|EasyFM
-#AutoIt3Wrapper_Res_Field=Version (short)|1.4.5.8
-#AutoIt3Wrapper_Res_Field=Version (long)|1.4.5.8
+#AutoIt3Wrapper_Res_Field=Version (short)|1.5.0.0
+#AutoIt3Wrapper_Res_Field=Version (long)|1.5.0.0
 #AutoIt3Wrapper_Res_Field=Description (short)|Module de simulation de forgemagie
 #AutoIt3Wrapper_Res_Field=Description (long)|Module de simulation de forgemagie
 #AutoIt3Wrapper_Res_Field=Type|Module
