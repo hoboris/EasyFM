@@ -625,17 +625,18 @@ Func DisplayRuneDesc($tmp)
 	GUICtrlSetData($DisplayRune[1], "PWR : " & $Rune[$IndexRune][1])
 	GUICtrlSetData($DisplayRune[2], "Bonus : +" & $Rune[$IndexRune][2])
 
+	_GDIPlus_Startup()
+	$hImage = _GDIPlus_ImageLoadFromFile(@ScriptDir & "\EasyFM\images\runes\None.png")
 	If FileExists(@ScriptDir & "\EasyFM\images\runes\" & $tmp & ".png") = 1 Then ;Chargement de l'image de la Rune
-		_GDIPlus_Startup()
 		$hImage = _GDIPlus_ImageLoadFromFile(@ScriptDir & "\EasyFM\images\runes\" & $tmp & ".png")
-		$hGraphic = _GDIPlus_GraphicsCreateFromHWND($GUIGlobal)
-		GUIRegisterMsg($WM_PAINT, "MY_WM_PAINT")
-		GUISetState(@SW_UNLOCK, $GUIGlobal)
-		; Clean up resources
-		_GDIPlus_GraphicsDispose($hGraphic)
-		_GDIPlus_ImageDispose($hImage)
-		_GDIPlus_Shutdown()
 	EndIf
+	$hGraphic = _GDIPlus_GraphicsCreateFromHWND($GUIGlobal)
+	GUIRegisterMsg($WM_PAINT, "MY_WM_PAINT")
+	GUISetState(@SW_UNLOCK, $GUIGlobal)
+	; Clean up resources
+	_GDIPlus_GraphicsDispose($hGraphic)
+	_GDIPlus_ImageDispose($hImage)
+	_GDIPlus_Shutdown()
 	Return -1
 EndFunc   ;==>DisplayRuneDesc
 
