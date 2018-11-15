@@ -12,7 +12,6 @@
 #AutoIt3Wrapper_Res_Field=Description (long)|Module de simulation de forgemagie
 #AutoIt3Wrapper_Res_Field=Type|Module
 #AutoIt3Wrapper_Res_Field=Auteur|ExiTeD [Equipe nAiO]
-#AutoIt3Wrapper_Res_Field=Site|http://www.forgemagie.net/easyfm
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
 
 ; Entête du module
@@ -52,15 +51,15 @@ HotKeySet("{F8}", "ShowArray")
 TraySetIcon(@ScriptDir & "\EasyFM\images\EasyFM.ico")
 Global $hImage, $hGraphic, $Puits, $Rune, $NbJets, $LabelPoids, $LabelType, $LabelEffet, $Fusion, $Iindex, $RIndex, $PwrPerte, $LabelPuits, $PwrPerteOrigin, $HomeBG
 Global $MenuNouveau, $SubMenuNouveau1, $SubMenuNouveau2, $SubMenuNouveau3, $MenuAffichage, $SubMenuAffichage1, $SubMenuAffichage1, $ButtonRAZ, $ButtonFusionner, $LvlItem
-Global $ResItem, $SpecItem, $AutreItem, $TrapItem, $ListRune, $AutreItem, $GUIGlobal, $Res, $color, $CaracItem, $IndexRune, $LabelPWRGActuel, $LabelPWRGmax, $ItemLevel
-Global $PercentSN, $PercentSC, $PercentEC, $Random, $Treeview, $ItemBackUP, $SiteButton
+Global $ResItem, $SpecItem, $AutreItem, $DoItem, $NouveauItem, $ListRune, $GUIGlobal, $Res, $color, $CaracItem, $IndexRune, $LabelPWRGActuel, $LabelPWRGmax, $ItemLevel
+Global $PercentSN, $PercentSC, $PercentEC, $Random, $Treeview, $ItemBackUP
 Global $sFileMap = @ScriptDir & "\EasyFM\bin\Configuration.txt"
 Global $sFileCore = @ScriptDir & "\EasyFM\images\core\"
 Global $NbRunes = _FileCountLines($sFileMap)
 Global $Rune[$NbRunes + 1][6]
 Global $RuneLog[$NbRunes - 1][2]
 Global $Filtre = False
-_FileReadToArray2D($sFileMap, $Rune, "|")
+_FileReadToArray2D($sFileMap, $Rune, ",")
 
 Global $DisplayItem, $Item, $Resulat, $Annexe, $DisplayRune, $ItemBackUP, $CompareItem
 Global $Annexe[9] ;Création des Labels Annexe
@@ -72,7 +71,7 @@ Global $Item[1][9]
 
 GUI()
 Func GUI()
-	$GUIGlobal = GUICreate("EasyFM - Service Forgemagie - http://www.forgemagie.net", 585, 540)
+	$GUIGlobal = GUICreate("EasyFM - Service Forgemagie", 585, 540)
 	GUISetIcon(@ScriptDir & "\EasyFM\images\easyFM.ico")
 	GUISetFont(10, 400, 0, "Tahoma")
 	GUISetBkColor(0xBBAE98)
@@ -106,7 +105,9 @@ Func GUI()
 	GUICtrlSetImage(-1, $sFileCore & "SpecialTreeView.bmp")
 	$AutreItem = GUICtrlCreateTreeViewItem("Autres", $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "AutresTreeView.bmp")
-	$TrapItem = GUICtrlCreateTreeViewItem("Pièges & NotUsed", $Treeview)
+	$DoItem = GUICtrlCreateTreeViewItem("Dommages", $Treeview)
+	GUICtrlSetImage(-1, $sFileCore & "NotUsedTreeView.bmp")
+	$NouveauItem = GUICtrlCreateTreeViewItem("Nouveau", $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "NotUsedTreeView.bmp")
 	$ListRune = GUICtrlCreateList("", 460, 50, 110, 260, "", $WS_EX_CLIENTEDGE)
 	GUICtrlSetFont($ListRune, 9.5, 800)
@@ -126,9 +127,6 @@ Func GUI()
 	$Levier = GUICtrlCreatePic($sFileCore & "levier.bmp", 400, 270, 52, 66)
 	$ExiPic = GUICtrlCreatePic($sFileCore & "iop.bmp", 550, 444, 24, 36)
 	$HomeBG = GUICtrlCreatePic($sFileCore & "accueil.bmp", 6, 16, 264, 328)
-	$SiteButton = GUICtrlCreateLabel("Accèder au site Service Forgemagie", 70, 502, 180, 14)
-	GUICtrlSetFont($SiteButton, 8, 400, 4)
-	GUICtrlSetColor($SiteButton, 0x0000FF)
 
 	$Annexe[0] = GUICtrlCreateLabel("", 300, 360, 140, 20) ;PWRGActuel
 	$Annexe[1] = GUICtrlCreateLabel("", 309, 385, 140, 20) ;PWRGmax
@@ -204,8 +202,10 @@ Func GUI()
 				SetDataList(3)
 			Case $msg = $AutreItem
 				SetDataList(4)
-			Case $msg = $TrapItem
+			Case $msg = $DoItem
 				SetDataList(5)
+			Case $msg = $NouveauItem
+				SetDataList(6)
 			Case $msg = $ButtonFusionner
 				Forgemagie(GUICtrlRead($ListRune))
 			Case $msg = $SubMenuNouveau1
@@ -213,7 +213,7 @@ Func GUI()
 			Case $msg = $SubMenuNouveau2
 				SaveItem()
 			Case $msg = $SubMenuAide2
-				ShellExecute("http://www.forgemagie.net/forum/3-divers/156-easyfm-recensement-des-bug")
+				ShellExecute("https://github.com/hoboris/EasyFM/issues")
 			Case $msg = $SubMenuAide3
 				MsgBox(0, "A propos de EasyFM", "EasyFM v" & FileGetVersion(@ScriptName) & " Beta")
 			Case $msg = $SubMenuAffichage1
@@ -228,10 +228,6 @@ Func GUI()
 				EndIf
 			Case $msg = $ButtonRAZ
 				ResetPuits()
-			Case $msg = $SiteButton
-				ShellExecute("http://www.forgemagie.net")
-			Case $msg = $Marks
-				ShellExecute("http://www.forgemagie.net")
 			Case $msg = $SubMenuNouveau4
 				$AskQuit = MsgBox(3, "Fermer L'application", "Êtes vous sûr de vouloir Quitter ?")
 				If $AskQuit = 6 Then Exit
@@ -842,7 +838,7 @@ EndFunc   ;==>SaveItem
 
 Func LoadItem($LoadDir)
 	Global $Item[_FileCountLines($LoadDir) + 1][9]
-	_FileReadToArray2D($LoadDir, $Item, "|")
+	_FileReadToArray2D($LoadDir, $Item, ",")
 	$LvlItem = $Item[UBound($Item, 1) - 1][UBound($Item, 2) - 1]
 	$NbJets = _FileCountLines($LoadDir)
 	$Fusion = 0

@@ -1,53 +1,89 @@
-RUNENAME|POIDS|BONUS|CATID|SUBCATID|BONUSNAME|COLOR|
-Ine|1|1|1|1|en Intelligence|D46A51|
-Fo|1|1|1|2|en Force|99D39B|
-Cha|1|1|1|3|à la Chance|74B0F2|
-Age|1|1|1|4|en Agilité|D6DA8B|
-Vi|1|3|1|5|en Vitalité|F0F0F2|
-Sa|3|1|1|6|en Sagesse|B7B8BB|
-Pa Ine|3|3|1|1|en Intelligence|D46A51|
-Pa Fo|3|3|1|2|en Force|99D39B|
-Pa Cha|3|3|1|3|à la Chance|74B0F2|
-Pa Age|3|3|1|4|en Agilité|D6DA8B|
-Pa Vi|3|10|1|5|en Vitalité|F0F0F2|
-Pa Sa|9|3|1|6|en Sagesse|B7B8BB|
-Ra Ine|10|10|1|1|en Intelligence|D46A51|
-Ra Fo|10|10|1|2|en Force|99D39B|
-Ra Cha|10|10|1|3|à la Chance|74B0F2|
-Ra Age|10|10|1|4|en Agilité|D6DA8B|
-Ra Vi|10|30|1|5|en Vitalité|F0F0F2|
-Ra Sa|30|10|1|6|en Sagesse|B7B8BB|
-Ré Feu|6|1|2|1|de résistance Feu|FF0000|
-Ré Terre|6|1|2|1|de résistance Terre|9EB73E|
-Ré Eau|6|1|2|1|de résistance Eau|628786|
-Ré Air|6|1|2|1|de résistance Air|E5E0C2|
-Ré Neutre|6|1|2|2|de résistance Neutre|717964|
-Ré Per Feu|5|1|2|2|% de résistance Feu|F29200|
-Ré Per Terre|5|1|2|2|% de résistance Terre|70CE99|
-Ré Per Eau|5|1|2|2|% de résistance Eau|65A7F1|
-Ré Per Air|5|1|2|2|% de résistance Air|DAD08B|
-Ré Per Neutre|5|1|2|2|% de résistance Neutre|4E636D|
-Prospe|3|1|4|3|en Prospection|E6B800|
-Pa Prospe|9|3|4|3|en Prospection|E6B800|
-Do Per|2|1|4|1|% de dommages|43372C|
-Pa Do Per|6|3|4|1|% de dommages|43372C|
-Ra Do Per|20|10|4|1|% de dommages|43372C|
-Ini|1|10|4|2|en Initiative|AC9757|
-Pa Ini|3|30|4|2|en Initiative|AC9757|
-Ra Ini|10|100|4|2|en Initiative|AC9757|
-Pod|1|10|5|1|aux Pods|D5A82C|
-Pa Pod|3|30|5|1|aux Pods|D5A82C|
-Ra Pod|10|100|5|1|aux Pods|D5A82C|
-Ga PA|100|1|3|1|PA|F8A814|
-Ga PM|90|1|3|2|PM|1AB807|
-PO|51|1|3|3|à la Portée|5D0F24|
-Soin|20|1|3|4|de Soins|F53333|
-Do|20|1|3|5|de Dommages|3E7571|
-Invo|30|1|3|6|créatures invocables|007339|
-Cri|30|1|3|7|aux Coups Critiques|D41702|
-Do Pi|15|1|5|1|de dommages aux pièges|5B6F91|
-Pa Do Pi|45|3|5|1|de dommages aux pièges|5B6F91|
-Pi Per|2|1|5|2|% de dommages aux pièges|58C787|
-Pa Pi Per|6|3|5|2|% de dommages aux pièges|58C787|
-Ra Pi Per|20|10|5|2|% de dommages aux pièges|58C787|
-Do Ren|NULL|1|5|2|aux renvois dommages|977900|
+RUNENAME,POIDS,BONUS,CATID,SUBCATID,BONUSNAME,COLOR,
+Ine,1,1,1,1,Intelligence,D46A51,
+Fo,1,1,1,2,Force,99D39B,
+Cha,1,1,1,3,Chance,74B0F2,
+Age,1,1,1,4,Agilité,D6DA8B,
+Vi,1,3,1,5,Vitalité,F0F0F2,
+Sa,3,1,1,6,Sagesse,B7B8BB,
+Pui,2,1,1,7,Puissance,43372C,
+Pa Ine,3,3,1,1,Intelligence,D46A51,
+Pa Fo,3,3,1,2,Force,99D39B,
+Pa Cha,3,3,1,3,Chance,74B0F2,
+Pa Age,3,3,1,4,Agilité,D6DA8B,
+Pa Vi,3,10,1,5,Vitalité,F0F0F2,
+Pa Sa,9,3,1,6,Sagesse,B7B8BB,
+Pa Pui,6,3,1,7,Puissance,43372C,
+Ra Ine,10,10,1,1,Intelligence,D46A51,
+Ra Fo,10,10,1,2,Force,99D39B,
+Ra Cha,10,10,1,3,Chance,74B0F2,
+Ra Age,10,10,1,4,Agilité,D6DA8B,
+Ra Vi,10,30,1,5,Vitalité,F0F0F2,
+Ra Sa,30,10,1,6,Sagesse,B7B8BB,
+Ra Pui,20,10,1,7,Puissance,43372C,
+Ré Feu,2,1,2,1,Résistance Feu,FF0000,
+Ré Terre,2,1,2,1,Résistance Terre,9EB73E,
+Ré Eau,2,1,2,1,Résistance Eau,628786,
+Ré Air,2,1,2,1,Résistance Air,E5E0C2,
+Ré Neutre,2,1,2,1,Résistance Neutre,717964,
+Ré Per Feu,6,1,2,2,% Résistance Feu,F29200,
+Ré Per Terre,6,1,2,2,% Résistance Terre,70CE99,
+Ré Per Eau,6,1,2,2,% Résistance Eau,65A7F1,
+Ré Per Air,6,1,2,2,% Résistance Air,DAD08B,
+Ré Per Neutre,6,1,2,2,% Résistance Neutre,4E636D,
+Ré Per Mé,15,1,2,7,% Résistance Mêlée,000000,
+Ré Per Di,15,1,2,7,% Résistance Distance,000000,
+Ré Pou,2,1,2,3,Résistance Poussée,000000,
+Ré Cri,2,1,2,4,Résistance Critiques,000000,
+Ré Pa,7,1,2,5,Esquive PA,000000,
+Ré Pm,7,1,2,6,Esquive PM,000000,
+Pa Ré Pou,6,3,2,3,Résistance Poussée,000000,
+Pa Ré Cri,6,3,2,4,Résistance Critiques,000000,
+Pa Ré Pa,21,3,2,5,Esquive PA,000000,
+Pa Ré Pm,21,3,2,6,Esquive PM,000000,
+Prospe,3,1,4,2,Prospection,E6B800,
+Pa Prospe,9,3,4,2,Prospection,E6B800,
+Ini,1,10,4,1,Initiative,AC9757,
+Pa Ini,3,30,4,1,Initiative,AC9757,
+Ra Ini,10,100,4,1,Initiative,AC9757,
+Pod,2.5,10,4,3,Pods,D5A82C,
+Pa Pod,7.5,30,4,3,Pods,D5A82C,
+Ra Pod,25,100,4,3,Pods,D5A82C,
+Ga Pa,100,1,3,1,PA,F8A814,
+Ga Pm,90,1,3,2,PM,1AB807,
+Po,51,1,3,3,Portée,5D0F24,
+So,10,1,3,4,Soins,F53333,
+Invo,30,1,3,6,Invocations,007339,
+Cri,10,1,3,7,% Critiques,D41702,
+Pi,5,1,4,4,Dommages (pièges),5B6F91,
+Pa Pi,15,3,4,4,Dommages (pièges),5B6F91,
+Pi Per,2,1,4,5,Puissance (pièges),58C787,
+Pa Pi Per,6,3,4,5,Puissance (pièges),58C787,
+Ra Pi Per,20,10,4,5,Puissance (pièges),58C787,
+Ret Pa,7,1,6,1,Retrait Pa,000000,
+Ret Pm,7,1,6,1,Retrait Pm,000000,
+Tac,4,1,6,2,Tacle,000000,
+Fui,4,1,6,2,Fuite,000000,
+Pa Ret Pa,21,3,6,1,Retrait Pa,000000,
+Pa Ret Pm,21,3,6,1,Retrait Pm,000000,
+Pa Tac,12,3,6,2,Tacle,000000,
+Pa Fui,12,3,6,2,Fuite,000000,
+Do,20,1,5,1,Dommages,3E7571,
+Do Feu,5,1,5,2,Dommages Feu,000000,
+Do Terre,5,1,5,3,Dommages Terre,000000,
+Do Eau,5,1,5,4,Dommages Eau,000000,
+Do Air,5,1,5,5,Dommages Air,000000,
+Do Neutre,5,1,5,6,Dommages Neutre,000000,
+Do Pou,5,1,5,7,Dommages Poussée,000000,
+Do Cri,5,1,5,8,Dommages Critiques,000000,
+Do Ren,10,1,5,9,Renvois dommages,977900,
+Pa Do Feu,15,3,5,2,Dommages Feu,000000,
+Pa Do Terre,15,3,5,3,Dommages Terre,000000,
+Pa Do Eau,15,3,5,4,Dommages Eau,000000,
+Pa Do Air,15,3,5,5,Dommages Air,000000,
+Pa Do Neutre,15,3,5,6,Dommages Neutre,000000,
+Pa Do Pou,15,3,5,7,Dommages Poussée,000000,
+Pa Do Cri,15,3,5,8,Dommages Critiques,000000,
+Do Per Di,15,1,5,10,% Dommages Distance,000000,
+Do Per Ar,15,1,5,11,% Dommages Arme,000000,
+Do Per So,15,1,5,11,% Dommages Sorts,000000,
+Do Per Mé,15,1,5,10,% Dommages Mêlée,000000,
