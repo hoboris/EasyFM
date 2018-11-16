@@ -109,14 +109,14 @@ Func GUI()
 	GUICtrlSetFont($LabelRune, 11, 800)
 	$CaracItem = GUICtrlCreateTreeViewItem("Caractéristiques", $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "CaracTreeView.bmp")
+	$DoItem = GUICtrlCreateTreeViewItem("Dommages", $Treeview)
+	GUICtrlSetImage(-1, $sFileCore & "NotUsedTreeView.bmp")
 	$ResItem = GUICtrlCreateTreeViewItem("Résistances", $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "ResTreeView.bmp")
 	$SpecItem = GUICtrlCreateTreeViewItem("Spéciales", $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "SpecialTreeView.bmp")
 	$AutreItem = GUICtrlCreateTreeViewItem("Autres", $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "AutresTreeView.bmp")
-	$DoItem = GUICtrlCreateTreeViewItem("Dommages", $Treeview)
-	GUICtrlSetImage(-1, $sFileCore & "NotUsedTreeView.bmp")
 	$NouveauItem = GUICtrlCreateTreeViewItem("Nouveau", $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "NotUsedTreeView.bmp")
 	$ListRune = GUICtrlCreateList("", 460, 50, 110, 290, "", $WS_EX_CLIENTEDGE)
@@ -206,13 +206,13 @@ Func GUI()
 				SetDataList(GUICtrlRead($Treeview) - 18)
 			Case $msg = $CaracItem
 				SetDataList(1)
-			Case $msg = $ResItem
-				SetDataList(2)
-			Case $msg = $SpecItem
-				SetDataList(3)
-			Case $msg = $AutreItem
-				SetDataList(4)
 			Case $msg = $DoItem
+				SetDataList(2)
+			Case $msg = $ResItem
+				SetDataList(3)
+			Case $msg = $SpecItem
+				SetDataList(4)
+			Case $msg = $AutreItem
 				SetDataList(5)
 			Case $msg = $NouveauItem
 				SetDataList(6)
@@ -771,7 +771,7 @@ Func NewItem()
 	Next
 
 	For $x = 0 To 16 - 1
-		$DisplayBuilder[$x + 1][0] = GUICtrlCreateCombo("Sélectionnez le Jet", 35, 50 + 24 * $x, 185, 25, $CBS_DROPDOWNLIST) ; Choix du Jet
+		$DisplayBuilder[$x + 1][0] = GUICtrlCreateCombo("Sélectionnez le Jet", 35, 50 + 24 * $x, 185, 25, BitOr($CBS_DROPDOWNLIST, $WS_VSCROLL)) ; Choix du Jet
 		GUICtrlSetState(-1, $GUI_HIDE)
 		For $i = 2 To $NbRunes Step 1 ; Envois des données des différents types de jets dans le choix du Jet
 			GUICtrlSetData($DisplayBuilder[$x + 1][0], $Rune[$i][5])
