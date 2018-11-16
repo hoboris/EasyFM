@@ -16,7 +16,7 @@
 
 ; Entête du module
 Global Const _
-	$MODULE_NOM = "EasyFM", $MODULE_AUTEUR = "ExiTeD", $MODULE_VERSION = "1.4.5.8", _
+	$MODULE_NOM = "EasyFM", $MODULE_AUTEUR = "ExiTeD", $MODULE_VERSION = "1.5.0.0", _
 	$LAUNCH_PARAMETER = "-launch", $DEBUG_MODE = (FileExists("debug.txt")=1)
 If StringLower($cmdLine[$cmdLine[0]]) <> $LAUNCH_PARAMETER Then ; Lancement parallèle
 	Local $ligne = ""
@@ -53,7 +53,7 @@ Global $hImage, $hGraphic, $Puits, $Rune, $NbJets, $LabelPoids, $LabelType, $Lab
 Global $MenuNouveau, $SubMenuNouveau1, $SubMenuNouveau2, $SubMenuNouveau3, $MenuAffichage, $SubMenuAffichage1, $SubMenuAffichage1, $ButtonRAZ, $ButtonFusionner, $LvlItem
 Global $ResItem, $SpecItem, $AutreItem, $DoItem, $NouveauItem, $ListRune, $GUIGlobal, $Res, $color, $CaracItem, $IndexRune, $LabelPWRGActuel, $LabelPWRGmax, $ItemLevel
 Global $PercentSN, $PercentSC, $PercentEC, $Random, $Treeview, $ItemBackUP
-Global $sFileMap = @ScriptDir & "\EasyFM\bin\Configuration.txt"
+Global $sFileMap = @ScriptDir & "\EasyFM\bin\Configuration.csv"
 Global $sFileCore = @ScriptDir & "\EasyFM\images\core\"
 Global $NbRunes = _FileCountLines($sFileMap)
 Global $Rune[$NbRunes + 1][6]
@@ -69,6 +69,8 @@ Global $DisplayItem[18][3] ; Création des Labels Jets
 Global $CompareItem[18]
 Global $Item[1][9]
 
+Global Enum $Dofus, $DofusTouch
+
 GUI()
 Func GUI()
 	$GUIGlobal = GUICreate("EasyFM - Service Forgemagie", 585, 540)
@@ -83,6 +85,12 @@ Func GUI()
 	$MenuAffichage = GUICtrlCreateMenu("Session")
 	$SubMenuAffichage1 = GUICtrlCreateMenuItem("Objet en cours", $MenuAffichage)
 	$SubMenuAffichage2 = GUICtrlCreateMenuItem("Runes Utilisées", $MenuAffichage)
+	$MenuPlateforme = GUICtrlCreateMenu("Plateforme")
+	$SubMenuPlateforme1 = GUICtrlCreateMenuItem("Dofus", $MenuPlateforme)
+	$SubMenuPlateforme2 = GUICtrlCreateMenuItem("Dofus Touch", $MenuPlateforme)
+;~	$MenuLangue = GUICtrlCreateMenu("Langue")
+;~	$SubMenuLangue1 = GUICtrlCreateMenuItem("Français", $MenuLangue)
+;~	$SubMenuLangue2 = GUICtrlCreateMenuItem("Anglais", $MenuLangue)
 	$MenuAide = GUICtrlCreateMenu("Aide")
 ;~ 	$SubMenuAide1 = GUICtrlCreateMenuItem("Aide en Ligne", $MenuAide)
 	$SubMenuAide2 = GUICtrlCreateMenuItem("Signaler un Bug", $MenuAide)
@@ -90,6 +98,8 @@ Func GUI()
 
 	$ButtonFusionner = GUICtrlCreateButton("Fusionner", 300, 255, 100, 30, $BS_DEFPUSHBUTTON)
 	$ButtonRAZ = GUICtrlCreateButton("Reset", 330, 310, 40, 20)
+	GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
+	GUICtrlSetState($ButtonRAZ, $GUI_DISABLE)
 	$Treeview = GUICtrlCreateTreeView(290, 50, 160, 90, BitOR($TVS_HASBUTTONS, $TVS_HASLINES, $TVS_LINESATROOT, $TVS_DISABLEDRAGDROP, $TVS_SHOWSELALWAYS), $WS_EX_CLIENTEDGE)
 	GUICtrlSetColor($Treeview, 0xa06000)
 	GUICtrlSetFont($Treeview, 9.5, 800)
@@ -109,7 +119,7 @@ Func GUI()
 	GUICtrlSetImage(-1, $sFileCore & "NotUsedTreeView.bmp")
 	$NouveauItem = GUICtrlCreateTreeViewItem("Nouveau", $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "NotUsedTreeView.bmp")
-	$ListRune = GUICtrlCreateList("", 460, 50, 110, 260, "", $WS_EX_CLIENTEDGE)
+	$ListRune = GUICtrlCreateList("", 460, 50, 110, 290, "", $WS_EX_CLIENTEDGE)
 	GUICtrlSetFont($ListRune, 9.5, 800)
 	GUICtrlCreateGroup("Objet - Bonus", 4, 0, 270, 360)
 	GUICtrlCreateGroup("Rune", 290, 150, 164, 100)
@@ -212,6 +222,14 @@ Func GUI()
 				NewItem()
 			Case $msg = $SubMenuNouveau2
 				SaveItem()
+			Case $msg = $SubMenuNouveau3
+				Local $File = FileSaveDialog("Selectionnez votre objet", @ScriptDir, "Text files (*.txt)")
+				If Not @error Then
+					LoadItem($File)
+				EndIf
+			Case $msg = $SubMenuNouveau4
+				$AskQuit = MsgBox(3, "Fermer L'application", "Êtes vous sûr de vouloir Quitter ?")
+				If $AskQuit = 6 Then Exit
 			Case $msg = $SubMenuAide2
 				ShellExecute("https://github.com/hoboris/EasyFM/issues")
 			Case $msg = $SubMenuAide3
@@ -221,16 +239,16 @@ Func GUI()
 			Case $msg = $SubMenuAffichage2
 				_ArraySort($RuneLog, 1, 0, 0, 1)
 				_ArrayDisplay($RuneLog, "Runes Utilisées")
-			Case $msg = $SubMenuNouveau3
-				Local $File = FileSaveDialog("Selectionnez votre objet", @ScriptDir, "Text files (*.txt)")
-				If Not @error Then
-					LoadItem($File)
-				EndIf
+			Case $msg = $SubMenuPlateforme1
+				LoadPlatform($Dofus)
+			Case $msg = $SubMenuPlateforme2
+				LoadPlatform($DofusTouch)
+;~			Case $msg = $SubMenuLangue1
+;~				MsgBox(0, "TODO", "TODO")
+;~			Case $msg = $SubMenuLangue2
+;~				MsgBox(0, "TODO", "TODO")
 			Case $msg = $ButtonRAZ
 				ResetPuits()
-			Case $msg = $SubMenuNouveau4
-				$AskQuit = MsgBox(3, "Fermer L'application", "Êtes vous sûr de vouloir Quitter ?")
-				If $AskQuit = 6 Then Exit
 		EndSelect
 	WEnd
 EndFunc   ;==>GUI
@@ -816,6 +834,8 @@ Func NewItem()
 				GUICtrlSetData($Annexe[0], "PWRGactuel : " & Round(GetPWRGactuel(False)))
 				GUICtrlSetData($Annexe[1], "PWRGmaximal : " & Round(GetPWRGmax()))
 				GUICtrlSetData($Annexe[4], "Etat PWRG : " & Round(GetPWRGactuel(False) / GetPWRGmax() * 100) & "%")
+				GUICtrlSetState($ButtonFusionner, $GUI_ENABLE)
+				GUICtrlSetState($ButtonRAZ, $GUI_ENABLE)
 				GUIDelete($Form1)
 				ResetComparerObjet()
 				ResetRuneLog()
@@ -848,6 +868,8 @@ Func LoadItem($LoadDir)
 	GUICtrlSetData($Annexe[0], "PWRGactuel : " & Round(GetPWRGactuel(False)))
 	GUICtrlSetData($Annexe[1], "PWRGmaxi : " & Round(GetPWRGmax()))
 	GUICtrlSetData($Annexe[4], "Etat PWRG : " & Round(GetPWRGactuel(False) / GetPWRGmax() * 100) & "%")
+	GUICtrlSetState($ButtonFusionner, $GUI_ENABLE)
+	GUICtrlSetState($ButtonRAZ, $GUI_ENABLE)
 	ResetComparerObjet()
 	ResetRuneLog()
 	DisplayDelete()
@@ -900,3 +922,50 @@ EndFunc   ;==>Msg
 Func ShowArray()
 ;~ 	_ArrayDisplay($DisplayItem)
 EndFunc   ;==>ShowArray
+
+Func LoadPlatform($tmp)
+	If $tmp = $Dofus Then
+		$sFileMap = @ScriptDir & "\EasyFM\bin\Configuration.csv"
+	ElseIf $tmp = $DofusTouch Then
+		$sFileMap = @ScriptDir & "\EasyFM\bin\ConfigurationTouch.csv"
+	Else
+		Return
+	EndIf
+	ResetAll()
+EndFunc   ;==>LoadPlatform
+
+Func ResetAll()
+	GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
+	GUICtrlSetState($ButtonRAZ, $GUI_DISABLE)
+	GUICtrlSetData($ListRune, "")
+	GUICtrlSetData($LabelPuits, "")
+	For $x = 0 To UBound($Annexe) - 1
+		GUICtrlSetData($Annexe[$x], "")
+	Next
+	For $x = 0 To UBound($Resultat) - 1
+		GUICtrlSetData($Resultat[$x], "")
+	Next
+	For $x = 0 To UBound($DisplayRune) - 1
+		GUICtrlSetData($DisplayRune[$x], "")
+	Next
+	ReDim $Item[1][9]
+	$HomeBG = GUICtrlCreatePic($sFileCore & "accueil.bmp", 6, 16, 264, 328)
+
+	$NbRunes = _FileCountLines($sFileMap)
+	ReDim $Rune[$NbRunes + 1][6]
+	ReDim $RuneLog[$NbRunes - 1][2]
+	_FileReadToArray2D($sFileMap, $Rune, ",")
+	$Fusion = 0
+	$Puits = 0
+	ResetComparerObjet()
+	ResetRuneLog()
+	
+	_GDIPlus_Startup()
+	$hImage = _GDIPlus_ImageLoadFromFile("")
+	$hGraphic = _GDIPlus_GraphicsCreateFromHWND($GUIGlobal)
+	GUIRegisterMsg($WM_PAINT, "MY_WM_PAINT")
+	GUISetState(@SW_UNLOCK, $GUIGlobal)
+	_GDIPlus_GraphicsDispose($hGraphic)
+	_GDIPlus_ImageDispose($hImage)
+	_GDIPlus_Shutdown()
+EndFunc   ;==>ResetAll
