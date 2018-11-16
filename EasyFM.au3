@@ -949,6 +949,7 @@ Func ResetAll()
 		GUICtrlSetData($DisplayRune[$x], "")
 	Next
 	ReDim $Item[1][9]
+	GUICtrlDelete($HomeBG)
 	$HomeBG = GUICtrlCreatePic($sFileCore & "accueil.bmp", 6, 16, 264, 328)
 
 	$NbRunes = _FileCountLines($sFileMap)
