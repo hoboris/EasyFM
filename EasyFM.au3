@@ -40,6 +40,7 @@ EndIf
 #Include <ButtonConstants.au3>
 #Include <GUIConstantsEx.au3>
 #Include <WindowsConstants.au3>
+#Include <GuiComboBox.au3>
 #EndRegion
 
 #EndRegion Librairies personnelles
@@ -771,18 +772,19 @@ Func NewItem()
 	Next
 
 	For $x = 0 To 16 - 1
-		$DisplayBuilder[$x + 1][0] = GUICtrlCreateCombo("Sélectionnez le Jet", 35, 50 + 24 * $x, 185, 25, BitOr($CBS_DROPDOWNLIST, $WS_VSCROLL)) ; Choix du Jet
+		$DisplayBuilder[$x + 1][0] = GUICtrlCreateCombo("", 35, 50 + 24 * $x, 185, 25, BitOr($CBS_DROPDOWNLIST, $WS_VSCROLL)) ; Choix du Jet
 		GUICtrlSetState(-1, $GUI_HIDE)
 		For $i = 2 To $NbRunes Step 1 ; Envois des données des différents types de jets dans le choix du Jet
 			GUICtrlSetData($DisplayBuilder[$x + 1][0], $Rune[$i][5])
 		Next
+		_GUICtrlComboBox_SetCurSel($DisplayBuilder[$x + 1][0], 0)
 		$DisplayBuilder[$x + 1][1] = GUICtrlCreateInput("0", 230, 52 + 24 * $x, 40, 20); Input du jet Minimum
 		GUICtrlSetState(-1, $GUI_HIDE)
 		$DisplayBuilder[$x + 1][2] = GUICtrlCreateInput("1", 280, 52 + 24 * $x, 40, 20) ; Input du jet Maximum
 		GUICtrlSetState(-1, $GUI_HIDE)
 		$DisplayBuilder[$x + 1][3] = GUICtrlCreateLabel($x + 1, 14, 52 + 24 * $x, 14, 20, $SS_RIGHT) ; Label numéro du Jet
 		GUICtrlSetState(-1, $GUI_HIDE)
-		$DisplayBuilder[$x + 1][4] = GUICtrlCreateInput("500", 330, 52 + 24 * $x, 40, 20) ; Input du jet actuel
+		$DisplayBuilder[$x + 1][4] = GUICtrlCreateInput("0", 330, 52 + 24 * $x, 40, 20) ; Input du jet actuel
 		GUICtrlSetState(-1, $GUI_HIDE)
 	Next
 
