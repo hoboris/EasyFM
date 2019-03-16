@@ -89,9 +89,9 @@ Func GUI()
 	$MenuPlateforme = GUICtrlCreateMenu("Plateforme")
 	$SubMenuPlateforme1 = GUICtrlCreateMenuItem("Dofus", $MenuPlateforme)
 	$SubMenuPlateforme2 = GUICtrlCreateMenuItem("Dofus Touch", $MenuPlateforme)
-;~	$MenuLangue = GUICtrlCreateMenu("Langue")
-;~	$SubMenuLangue1 = GUICtrlCreateMenuItem("Français", $MenuLangue)
-;~	$SubMenuLangue2 = GUICtrlCreateMenuItem("Anglais", $MenuLangue)
+	$MenuLangue = GUICtrlCreateMenu("Langue")
+	$SubMenuLangue1 = GUICtrlCreateMenuItem("Français", $MenuLangue)
+	$SubMenuLangue2 = GUICtrlCreateMenuItem("Anglais", $MenuLangue)
 	$MenuAide = GUICtrlCreateMenu("Aide")
 ;~ 	$SubMenuAide1 = GUICtrlCreateMenuItem("Aide en Ligne", $MenuAide)
 	$SubMenuAide2 = GUICtrlCreateMenuItem("Signaler un Bug", $MenuAide)
@@ -132,7 +132,7 @@ Func GUI()
 	$FiltreRune = GUICtrlCreateCheckbox("Masquer Runes Exo.", 340, 140, 110, 16)
 	GUICtrlSetFont($FiltreRune, 8, 400)
 	$Marks = GUICtrlCreatePic($sFileCore & "bannière.jpg", 3, 462, 274, 40)
-	$Copyrights = GUICtrlCreateLabel("Certaines illustrations sont la priopriété d'Ankama Studio et de Dofus. Tous droits réservés. ExiTeD© 2009-2010. ", 290, 490, 300, 23)
+	$Copyrights = GUICtrlCreateLabel("Certaines illustrations sont la propriété d'Ankama Studio et de Dofus. Tous droits réservés. ExiTeD© 2009-2010. ", 290, 490, 300, 23)
 	GUICtrlSetFont($Copyrights, 7, 400)
 	$Enclume = GUICtrlCreatePic($sFileCore & "enclume.bmp", 200, 390, 70, 63)
 	$Levier = GUICtrlCreatePic($sFileCore & "levier.bmp", 400, 270, 52, 66)
@@ -224,7 +224,7 @@ Func GUI()
 			Case $msg = $SubMenuNouveau2
 				SaveItem()
 			Case $msg = $SubMenuNouveau3
-				Local $File = FileSaveDialog("Selectionnez votre objet", @ScriptDir, "Text files (*.txt)")
+				Local $File = FileSaveDialog("Sélectionnez votre objet", @ScriptDir, "Text files (*.txt)")
 				If Not @error Then
 					LoadItem($File)
 				EndIf
@@ -244,10 +244,10 @@ Func GUI()
 				LoadPlatform($Dofus)
 			Case $msg = $SubMenuPlateforme2
 				LoadPlatform($DofusTouch)
-;~			Case $msg = $SubMenuLangue1
-;~				MsgBox(0, "TODO", "TODO")
-;~			Case $msg = $SubMenuLangue2
-;~				MsgBox(0, "TODO", "TODO")
+			Case $msg = $SubMenuLangue1
+				MsgBox(0, "TODO", "TODO")
+			Case $msg = $SubMenuLangue2
+				MsgBox(0, "TODO", "TODO")
 			Case $msg = $ButtonRAZ
 				ResetPuits()
 		EndSelect
@@ -257,7 +257,7 @@ EndFunc   ;==>GUI
 Func Forgemagie($tmp)
 	$Iindex = _ArraySearch($Rune, $tmp, 0, 0, 1, 0, 1, 0) ;Recherche indice de la rune
 	If $Iindex = -1 Then
-		GUICtrlSetData($Resultat[0], "En séléctionnant une rune c'est mieux !")
+		GUICtrlSetData($Resultat[0], "En sélectionnant une rune c'est mieux !")
 		GUICtrlSetData($Resultat[1], "")
 		GUICtrlSetData($Resultat[2], "")
 		GUICtrlSetData($Resultat[3], "")
@@ -347,14 +347,12 @@ Func CheckOvermax($IndexJ, $IndexR) ; Retourne True si Overmax Déjà présent ou s
 EndFunc   ;==>CheckOvermax
 
 Func Gain()
-	ConsoleWrite("caca")
 	$Item[$RIndex][0] = Number($Item[$RIndex][0]) + Number($Rune[$Iindex][2]) ; mise à jour du jetactuel
 	$Item[$RIndex][7] = "0x40a000" ; Colorisation du jet en vert clair
 	Return -1
 EndFunc   ;==>Gain
 
 Func Perte()
-	ConsoleWrite("caca2")
 	$PwrPerte = Number($Rune[$Iindex][1]) ;calcul du poids à perdre
 	If $Puits >= $PwrPerte And $Puits > 0 Then ; Si le puits est supérieur à la perte et s'il y a du puits
 		GUICtrlSetData($Resultat[2], "...Le puits absorbe la perte...")
@@ -391,7 +389,6 @@ Func Perte()
 			If $Item[$JetDown][7] <> "0x40a000" Then $Item[$JetDown][7] = "0xc00000"; Colorisation du Jet en rouge
 		EndIf
 	WEnd
-	ConsoleWrite("caca3")
 	If $Item[UBound($Item) - 1][0] = 0 Then DeleteExotique()
 	Return -1
 EndFunc   ;==>Perte
@@ -962,7 +959,7 @@ Func ResetAll()
 	$Puits = 0
 	ResetComparerObjet()
 	ResetRuneLog()
-	
+
 	_GDIPlus_Startup()
 	$hImage = _GDIPlus_ImageLoadFromFile("")
 	$hGraphic = _GDIPlus_GraphicsCreateFromHWND($GUIGlobal)
