@@ -54,10 +54,12 @@ Global $hImage, $hGraphic, $Puits, $Rune, $NbJets, $LabelPoids, $LabelType, $Lab
 Global $MenuNouveau, $SubMenuNouveau1, $SubMenuNouveau2, $SubMenuNouveau3, $MenuAffichage, $SubMenuAffichage1, $SubMenuAffichage1, $ButtonRAZ, $ButtonFusionner, $LvlItem
 Global $ResItem, $SpecItem, $AutreItem, $DoItem, $NouveauItem, $ListRune, $GUIGlobal, $Res, $color, $CaracItem, $IndexRune, $LabelPWRGActuel, $LabelPWRGmax, $ItemLevel
 Global $PercentSN, $PercentSC, $PercentEC, $Random, $Treeview, $ItemBackUP
-Global $sFileMap = @ScriptDir & "\EasyFM\bin\Configuration.csv"
+Global $DofusConfigurationPath = "\EasyFM\bin\Configuration.csv"
+Global $DofusTouchConfigurationPath = "\EasyFM\bin\ConfigurationTouch.csv"
+Global $sFileMap = @ScriptDir & $DofusConfigurationPath
 Global $sFileCore = @ScriptDir & "\EasyFM\images\core\"
 Global $NbRunes = _FileCountLines($sFileMap)
-Global $Rune[$NbRunes + 1][6]
+Global $Rune[$NbRunes + 1][8]
 Global $RuneLog[$NbRunes - 1][2]
 Global $Filtre = False
 _FileReadToArray2D($sFileMap, $Rune, ",")
@@ -71,6 +73,7 @@ Global $CompareItem[18]
 Global $Item[1][9]
 
 Global Enum $Dofus, $DofusTouch
+Global Enum $French, $English
 
 GUI()
 Func GUI()
@@ -183,7 +186,6 @@ Func GUI()
 	$LabelPuits = GUICtrlCreateLabel("", 300, 310, 30, 20) ;Création du Label Puits
 	GUICtrlSetFont($LabelPuits, 12, 800)
 
-;~ 	LoadItem(@ScriptDir & "/Gelano.txt")
 	GUISetState(@SW_SHOW, $GUIGlobal)
 
 	While 1
@@ -244,10 +246,10 @@ Func GUI()
 				LoadPlatform($Dofus)
 			Case $msg = $SubMenuPlateforme2
 				LoadPlatform($DofusTouch)
-			Case $msg = $SubMenuLangue1
-				MsgBox(0, "TODO", "TODO")
-			Case $msg = $SubMenuLangue2
-				MsgBox(0, "TODO", "TODO")
+			 Case $msg = $SubMenuLangue1
+				ChangeLanguage($French)
+			 Case $msg = $SubMenuLangue2
+				ChangeLanguage($English)
 			Case $msg = $ButtonRAZ
 				ResetPuits()
 		EndSelect
@@ -924,14 +926,24 @@ EndFunc   ;==>ShowArray
 
 Func LoadPlatform($tmp)
 	If $tmp = $Dofus Then
-		$sFileMap = @ScriptDir & "\EasyFM\bin\Configuration.csv"
+		$sFileMap = @ScriptDir & $DofusConfigurationPath
 	ElseIf $tmp = $DofusTouch Then
-		$sFileMap = @ScriptDir & "\EasyFM\bin\ConfigurationTouch.csv"
+		$sFileMap = @ScriptDir & $DofusTouchConfigurationPath
 	Else
 		Return
 	EndIf
 	ResetAll()
-EndFunc   ;==>LoadPlatform
+ EndFunc   ;==>LoadPlatform
+
+Func ChangeLanguage($tmp)
+   If $tmp = $French Then
+		MsgBox(0, "Langue", "Français")
+	ElseIf $tmp = $English Then
+		MsgBox(0, "Language", "English")
+	Else
+		Return
+	EndIf
+ EndFunc   ;==>ChangeLanguage
 
 Func ResetAll()
 	GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
@@ -952,7 +964,7 @@ Func ResetAll()
 	$HomeBG = GUICtrlCreatePic($sFileCore & "accueil.bmp", 6, 16, 264, 328)
 
 	$NbRunes = _FileCountLines($sFileMap)
-	ReDim $Rune[$NbRunes + 1][6]
+	ReDim $Rune[$NbRunes + 1][8]
 	ReDim $RuneLog[$NbRunes - 1][2]
 	_FileReadToArray2D($sFileMap, $Rune, ",")
 	$Fusion = 0
