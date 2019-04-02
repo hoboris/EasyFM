@@ -1,89 +1,89 @@
-RUNENAME,POIDS,BONUS,CATID,SUBCATID,BONUSNAME,COLOR
-Ine,1,1,1,1,Intelligence,D46A51
-Fo,1,1,1,2,Force,99D39B
-Cha,1,1,1,3,Chance,74B0F2
-Age,1,1,1,4,Agilité,D6DA8B
-Vi,1,3,1,5,Vitalité,F0F0F2
-Sa,3,1,1,6,Sagesse,B7B8BB
-Pui,2,1,1,7,Puissance,43372C
-Pa Ine,3,3,1,1,Intelligence,D46A51
-Pa Fo,3,3,1,2,Force,99D39B
-Pa Cha,3,3,1,3,Chance,74B0F2
-Pa Age,3,3,1,4,Agilité,D6DA8B
-Pa Vi,3,10,1,5,Vitalité,F0F0F2
-Pa Sa,9,3,1,6,Sagesse,B7B8BB
-Pa Pui,6,3,1,7,Puissance,43372C
-Ra Ine,10,10,1,1,Intelligence,D46A51
-Ra Fo,10,10,1,2,Force,99D39B
-Ra Cha,10,10,1,3,Chance,74B0F2
-Ra Age,10,10,1,4,Agilité,D6DA8B
-Ra Vi,10,30,1,5,Vitalité,F0F0F2
-Ra Sa,30,10,1,6,Sagesse,B7B8BB
-Ra Pui,20,10,1,7,Puissance,43372C
-Do,20,1,2,1,Dommages,3E7571
-Do Feu,5,1,2,2,Dommages Feu,000000
-Do Terre,5,1,2,3,Dommages Terre,000000
-Do Eau,5,1,2,4,Dommages Eau,000000
-Do Air,5,1,2,5,Dommages Air,000000
-Do Neutre,5,1,2,6,Dommages Neutre,000000
-Do Pou,5,1,2,7,Dommages Poussée,000000
-Do Cri,5,1,2,8,Dommages Critiques,000000
-Do Ren,10,1,2,9,Renvois dommages,977900
-Pa Do Feu,15,3,2,2,Dommages Feu,000000
-Pa Do Terre,15,3,2,3,Dommages Terre,000000
-Pa Do Eau,15,3,2,4,Dommages Eau,000000
-Pa Do Air,15,3,2,5,Dommages Air,000000
-Pa Do Neutre,15,3,2,6,Dommages Neutre,000000
-Pa Do Pou,15,3,2,7,Dommages Poussée,000000
-Pa Do Cri,15,3,2,8,Dommages Critiques,000000
-Do Per Di,15,1,2,10,% Dommages Distance,000000
-Do Per Ar,15,1,2,11,% Dommages Arme,000000
-Do Per Mé,15,1,2,10,% Dommages Mêlée,000000
-Do Per So,15,1,2,11,% Dommages Sorts,000000
-Ré Feu,2,1,3,1,Résistance Feu,FF0000
-Ré Terre,2,1,3,1,Résistance Terre,9EB73E
-Ré Eau,2,1,3,1,Résistance Eau,628786
-Ré Air,2,1,3,1,Résistance Air,E5E0C2
-Ré Neutre,2,1,3,1,Résistance Neutre,717964
-Ré Per Feu,6,1,3,2,% Résistance Feu,F29200
-Ré Per Terre,6,1,3,2,% Résistance Terre,70CE99
-Ré Per Eau,6,1,3,2,% Résistance Eau,65A7F1
-Ré Per Air,6,1,3,2,% Résistance Air,DAD08B
-Ré Per Neutre,6,1,3,2,% Résistance Neutre,4E636D
-Ré Per Mé,15,1,3,7,% Résistance Mêlée,000000
-Ré Per Di,15,1,3,7,% Résistance Distance,000000
-Ré Pou,2,1,3,3,Résistance Poussée,000000
-Ré Cri,2,1,3,4,Résistance Critiques,000000
-Ré Pa,7,1,3,5,Esquive PA,000000
-Ré Pm,7,1,3,6,Esquive PM,000000
-Pa Ré Pou,6,3,3,3,Résistance Poussée,000000
-Pa Ré Cri,6,3,3,4,Résistance Critiques,000000
-Pa Ré Pa,21,3,3,5,Esquive PA,000000
-Pa Ré Pm,21,3,3,6,Esquive PM,000000
-Ga Pa,100,1,4,1,PA,F8A814
-Ga Pm,90,1,4,2,PM,1AB807
-Po,51,1,4,3,Portée,5D0F24
-So,10,1,4,4,Soins,F53333
-Invo,30,1,4,5,Invocations,007339
-Cri,10,1,4,6,% Critique,D41702
-Prospe,3,1,5,2,Prospection,E6B800
-Pa Prospe,9,3,5,2,Prospection,E6B800
-Ini,1,10,5,1,Initiative,AC9757
-Pa Ini,3,30,5,1,Initiative,AC9757
-Ra Ini,10,100,5,1,Initiative,AC9757
-Pod,2.5,10,5,3,Pods,D5A82C
-Pa Pod,7.5,30,5,3,Pods,D5A82C
-Ra Pod,25,100,5,3,Pods,D5A82C
-Pi,5,1,5,4,Dommages (pièges),5B6F91
-Pa Pi,15,3,5,4,Dommages (pièges),5B6F91
-Pi Per,2,1,5,5,Puissance (pièges),58C787
-Pa Pi Per,6,3,5,5,Puissance (pièges),58C787
-Ra Pi Per,20,10,5,5,Puissance (pièges),58C787
-Ret Pa,7,1,6,1,Retrait Pa,000000
-Ret Pm,7,1,6,1,Retrait Pm,000000
-Tac,4,1,6,2,Tacle,000000
-Fui,4,1,6,2,Fuite,000000
-Pa Ret Pa,21,3,6,1,Retrait Pa,000000
-Pa Ret Pm,21,3,6,1,Retrait Pm,000000
-Pa Tac,12,3,6,2,Tacle,000000
-Pa Fui,12,3,6,2,Fuite,000000
+RUNENAMEFR,POIDS,BONUS,CATID,SUBCATID,BONUSNAMEFR,COLOR,RUNENAMEEN,BONUSNAMEEN
+Ine,1,1,1,1,Intelligence,D46A51,Int,Intelligence
+Fo,1,1,1,2,Force,99D39B,Stre,Strength
+Cha,1,1,1,3,Chance,74B0F2,Cha,Chance
+Age,1,1,1,4,Agilité,D6DA8B,Agi,Agility
+Vi,1,3,1,5,Vitalité,F0F0F2,Vit,Vitality
+Sa,3,1,1,6,Sagesse,B7B8BB,Wis,Wisdom
+Pui,2,1,1,7,Puissance,43372C,Pow,Power
+Pa Ine,3,3,1,1,Intelligence,D46A51,Pa Int,Intelligence
+Pa Fo,3,3,1,2,Force,99D39B,Pa Stre,Strength
+Pa Cha,3,3,1,3,Chance,74B0F2,Pa Cha,Chance
+Pa Age,3,3,1,4,Agilité,D6DA8B,Pa Agi,Agility
+Pa Vi,3,10,1,5,Vitalité,F0F0F2,Pa Vit,Vitality
+Pa Sa,9,3,1,6,Sagesse,B7B8BB,Pa Wis,Wisdom
+Pa Pui,6,3,1,7,Puissance,43372C,Pa Pow,Power
+Ra Ine,10,10,1,1,Intelligence,D46A51,Ra Int,Intelligence
+Ra Fo,10,10,1,2,Force,99D39B,Ra Stre,Strength
+Ra Cha,10,10,1,3,Chance,74B0F2,Ra Cha,Chance
+Ra Age,10,10,1,4,Agilité,D6DA8B,Ra Agi,Agility
+Ra Vi,10,30,1,5,Vitalité,F0F0F2,Ra Vit,Vitality
+Ra Sa,30,10,1,6,Sagesse,B7B8BB,Ra Wis,Wisdom
+Ra Pui,20,10,1,7,Puissance,43372C,Ra Pow,Power
+Do,20,1,2,1,Dommages,3E7571,Dam,Damage
+Do Feu,5,1,2,2,Dommages Feu,000000,Fire Dam,Fire Damage
+Do Terre,5,1,2,3,Dommages Terre,000000,Earth Dam,Earth Damage
+Do Eau,5,1,2,4,Dommages Eau,000000,Water Dam,Water Damage
+Do Air,5,1,2,5,Dommages Air,000000,Air Dam,Air Damage
+Do Neutre,5,1,2,6,Dommages Neutre,000000,Neutral Dam,Neutral Damage
+Do Pou,5,1,2,7,Dommages Poussée,000000,Psh Dam,Pushback Damage
+Do Cri,5,1,2,8,Dommages Critiques,000000,Cri Dam,Critical Damage
+Do Ren,10,1,2,9,Renvois dommages,977900,Dam Ref,Reflects damage
+Pa Do Feu,15,3,2,2,Dommages Feu,000000,Pa Fire Dam,Fire Damage
+Pa Do Terre,15,3,2,3,Dommages Terre,000000,Pa Earth Dam,Earth Damage
+Pa Do Eau,15,3,2,4,Dommages Eau,000000,Pa Water Dam,Water Damage
+Pa Do Air,15,3,2,5,Dommages Air,000000,Pa Air Dam,Air Damage
+Pa Do Neutre,15,3,2,6,Dommages Neutre,000000,Pa Neutral Dam,Neutral Damage
+Pa Do Pou,15,3,2,7,Dommages Poussée,000000,Pa Psh Dam,Pushback Damage
+Pa Do Cri,15,3,2,8,Dommages Critiques,000000,Pa Cri Dam,Critical Damage
+Do Per Di,15,1,2,10,% Dommages Distance,000000,Ra Dam Per,% Range Damage
+Do Per Ar,15,1,2,11,% Dommages Arme,000000,We Dam Per,% Weapon Damage
+Do Per Mé,15,1,2,10,% Dommages Mêlée,000000,Me Dam Per,% Melee Damage
+Do Per So,15,1,2,11,% Dommages Sorts,000000,Spe Dam Per,%Spell Damage
+Ré Feu,2,1,3,1,Résistance Feu,FF0000,Fire Res,Fire Resistance
+Ré Terre,2,1,3,1,Résistance Terre,9EB73E,Earth Res,Earth Resistance
+Ré Eau,2,1,3,1,Résistance Eau,628786,Water Res,Water Resistance
+Ré Air,2,1,3,1,Résistance Air,E5E0C2,Air Res,Air Resistance
+Ré Neutre,2,1,3,1,Résistance Neutre,717964,Neutral Res,Neutral Resistance
+Ré Per Feu,6,1,3,2,% Résistance Feu,F29200,Fire Res Per,% Fire Resistance
+Ré Per Terre,6,1,3,2,% Résistance Terre,70CE99,Earth Res Per,% Earth Resistance
+Ré Per Eau,6,1,3,2,% Résistance Eau,65A7F1,Water Res Per,% Water Resistance
+Ré Per Air,6,1,3,2,% Résistance Air,DAD08B,Air Res Per,% Air Resistance
+Ré Per Neutre,6,1,3,2,% Résistance Neutre,4E636D,Neutral Res Per,% Neutral Resistance
+Ré Per Mé,15,1,3,7,% Résistance Mêlée,000000,Me Res Per,% Melee Resistance
+Ré Per Di,15,1,3,7,% Résistance Distance,000000,Ra Res Per,% Range Resistance
+Ré Pou,2,1,3,3,Résistance Poussée,000000,Psh Res,Pushback Resistance
+Ré Cri,2,1,3,4,Résistance Critiques,000000,Cri Res,Critical Resistance
+Ré Pa,7,1,3,5,Esquive PA,000000,Ap Res,Ap Parry
+Ré Pm,7,1,3,6,Esquive PM,000000,Mp Res,Mp Parry
+Pa Ré Pou,6,3,3,3,Résistance Poussée,000000,Pa Psh Res,Pushback Resistance
+Pa Ré Cri,6,3,3,4,Résistance Critiques,000000,Pa Cri Res,Critical Resistance
+Pa Ré Pa,21,3,3,5,Esquive PA,000000,Pa Ap Res,Ap Parry
+Pa Ré Pm,21,3,3,6,Esquive PM,000000,Pa Mp Res,Mp Parry
+Ga Pa,100,1,4,1,PA,F8A814,Ap Ga,AP
+Ga Pm,90,1,4,2,PM,1AB807,Mp Ga,MP
+Po,51,1,4,3,Portée,5D0F24,Range,Range
+So,10,1,4,4,Soins,F53333,Hea,Heals
+Invo,30,1,4,5,Invocations,007339,Summo,Summons
+Cri,10,1,4,6,% Critique,D41702,Cri,% Critical
+Prospe,3,1,5,2,Prospection,E6B800,Prospe,Prospection
+Pa Prospe,9,3,5,2,Prospection,E6B800,Pa Prospe,Prospection
+Ini,1,10,5,1,Initiative,AC9757,Ini,Initiative
+Pa Ini,3,30,5,1,Initiative,AC9757,Pa Ini,Initiative
+Ra Ini,10,100,5,1,Initiative,AC9757,Ra Ini,Initiative
+Pod,2.5,10,5,3,Pods,D5A82C,Pod,Pods
+Pa Pod,7.5,30,5,3,Pods,D5A82C,Pa Pod,Pods
+Ra Pod,25,100,5,3,Pods,D5A82C,Ra Pod,Pods
+Pi,5,1,5,4,Dommages (pièges),5B6F91,Tra,Trap Damage
+Pa Pi,15,3,5,4,Dommages (pièges),5B6F91,Pa Tra,Trap Damage
+Pi Per,2,1,5,5,Puissance (pièges),58C787,Tra Per,Power (traps)
+Pa Pi Per,6,3,5,5,Puissance (pièges),58C787,Pa Tra Per,Power (traps)
+Ra Pi Per,20,10,5,5,Puissance (pièges),58C787,Ra Tra Per,Power (traps)
+Ret Pa,7,1,6,1,Retrait Pa,000000,Ap Red,Ap Reduction
+Ret Pm,7,1,6,1,Retrait Pm,000000,Mp Red,Mp Reduction
+Tac,4,1,6,2,Tacle,000000,Loc,Lock
+Fui,4,1,6,2,Fuite,000000,Dod,Dodge
+Pa Ret Pa,21,3,6,1,Retrait Pa,000000,Pa Ap Red,Ap Reduction
+Pa Ret Pm,21,3,6,1,Retrait Pm,000000,Pa Mp Red,Mp Reduction
+Pa Tac,12,3,6,2,Tacle,000000,Pa Loc,Lock
+Pa Fui,12,3,6,2,Fuite,000000,Pa Dod,Dodge
