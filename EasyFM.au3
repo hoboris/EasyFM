@@ -74,6 +74,8 @@ Global $Item[1][9]
 
 Global Enum $Dofus, $DofusTouch
 Global Enum $French, $English
+Global Enum $RuneName, $BonusName
+Global $Language = $English
 
 GUI()
 Func GUI()
@@ -195,7 +197,7 @@ Func GUI()
 				Exit
 			Case $msg = $ListRune
 				$ReadRune = GUICtrlRead($ListRune)
-				$IndexRune = _ArraySearch($Rune, $ReadRune, 1, 0, 0, 0, 1, 0)
+				$IndexRune = _ArraySearch($Rune, $ReadRune, 1, 0, 0, 0, 1, RuneIndex($RuneName))
 				If $IndexRune <> -1 Then
 					DisplayRuneDesc($ReadRune)
 					DisplayAnnexe($ReadRune)
@@ -265,11 +267,11 @@ Func Forgemagie($tmp)
 		GUICtrlSetData($Resultat[3], "")
 		Return -1
 	EndIf
-	$RIndex = _ArraySearch($Item, $Rune[$Iindex][5], 0, 0, 1, 0, 1, 6) ;Recherche de la ligne du jet correspondant à la rune
+	$RIndex = _ArraySearch($Item, $Rune[$Iindex][RuneIndex($BonusName)], 0, 0, 1, 0, 1, 6) ;Recherche de la ligne du jet correspondant à la rune
 	If $RIndex = -1 Then ; Si le jet est exotique
 		$RIndex = UBound($Item) - 1
 		If $Item[UBound($Item) - 1][0] = 0 Then CreateExotique($Iindex)
-		If $Rune[$Iindex][5] <> $Item[UBound($Item) - 1][6] Then
+		If $Rune[$Iindex][RuneIndex($BonusName)] <> $Item[UBound($Item) - 1][6] Then
 			GUICtrlSetData($Resultat[0], "Impossible d'ajouter 2 Exotique")
 			GUICtrlSetData($Resultat[1], "")
 			GUICtrlSetData($Resultat[2], "")
@@ -319,7 +321,7 @@ Func CreateExotique($Runeindex)
 	$Item[$x][1] = 0 ;PWR_ACTUEL
 	$Item[$x][2] = 0 ;Jet_min
 	$Item[$x][3] = Floor(100 / $Rune[$Runeindex][1]) ;Jet_max
-	$Item[$x][6] = $Rune[$Runeindex][5] ;Nom du Jet
+	$Item[$x][6] = $Rune[$Runeindex][RuneIndex($BonusName)] ;Nom du Jet
 	$Index = _ArraySearch($Rune, $Item[$x][6], 0, 0, 0, 0, 1, 5) ; Index de la rune correspondant au Jet
 	$Item[$x][4] = Round($Rune[$Index][1] / $Rune[$Runeindex][2], 2) ;PWR pour 1
 	$Item[$x][5] = $Item[$x][3] * $Item[$x][4] ;PWR_MAX
@@ -547,7 +549,7 @@ EndFunc   ;==>SelectionResultat
 
 Func ChercherLeJetQuiBaisse(); Retourne l'index du jet qui baisse
 	If $Item[UBound($Item) - 1][0] <> 0 And $Random = 3 Then Return UBound($Item) - 1
-	If $Item[UBound($Item) - 1][0] <> 0 And $Rune[$Iindex][5] <> $Item[UBound($Item) - 1][6] Then Return UBound($Item) - 1 ; Si exotique retourn le dernier jet ( ligne exotique )
+	If $Item[UBound($Item) - 1][0] <> 0 And $Rune[$Iindex][RuneIndex($BonusName)] <> $Item[UBound($Item) - 1][6] Then Return UBound($Item) - 1 ; Si exotique retourn le dernier jet ( ligne exotique )
 	For $x = 1 To UBound($Item) - 1 ; Recherche d'un jet overmax
 		If Number($Item[$x][0]) > Number($Item[$x][3]) And $Random = 3 Then Return $x
 		If Number($Item[$x][0]) > Number($Item[$x][3]) And $x <> $RIndex Then Return $x ; Retourne le jet overax
@@ -577,7 +579,7 @@ Func DisplayResultat()
 EndFunc   ;==>DisplayResultat
 
 Func DisplayAnnexe($tmp)
-	Local $Oindex = _ArraySearch($Rune, $tmp, 0, 0, 0, 0, 1, 0) ;Recherche indice de la rune
+	Local $Oindex = _ArraySearch($Rune, $tmp, 0, 0, 0, 0, 1, RuneIndex($RuneName)) ;Recherche indice de la rune
 	If $Oindex = -1 Then Return Msg("Selectionnez une rune")
 	Local $ZIndex = _ArraySearch($Item, $Rune[$Oindex][5], 0, 0, 1, 0, 1, 6) ;Recherche de la ligne du jet correspondant à la rune
 	If $ZIndex = -1 Then $ZIndex = UBound($Item) - 1
@@ -639,14 +641,14 @@ Func DisplayPuits()
 EndFunc   ;==>DisplayPuits
 
 Func DisplayRuneDesc($tmp)
-	GUICtrlSetData($DisplayRune[0], "Rune " & $tmp)
+	GUICtrlSetData($DisplayRune[0], "Rune " & $Rune[$IndexRune][RuneIndex($RuneName)])
 	GUICtrlSetData($DisplayRune[1], "PWR : " & $Rune[$IndexRune][1])
 	GUICtrlSetData($DisplayRune[2], "Bonus : +" & $Rune[$IndexRune][2])
 
 	_GDIPlus_Startup()
 	$hImage = _GDIPlus_ImageLoadFromFile(@ScriptDir & "\EasyFM\images\runes\None.png")
-	If FileExists(@ScriptDir & "\EasyFM\images\runes\" & $tmp & ".png") = 1 Then ;Chargement de l'image de la Rune
-		$hImage = _GDIPlus_ImageLoadFromFile(@ScriptDir & "\EasyFM\images\runes\" & $tmp & ".png")
+	If FileExists(@ScriptDir & "\EasyFM\images\runes\" & $Rune[$IndexRune][0] & ".png") = 1 Then ;Chargement de l'image de la Rune
+		$hImage = _GDIPlus_ImageLoadFromFile(@ScriptDir & "\EasyFM\images\runes\" & $Rune[$IndexRune][0] & ".png")
 	EndIf
 	$hGraphic = _GDIPlus_GraphicsCreateFromHWND($GUIGlobal)
 	GUIRegisterMsg($WM_PAINT, "MY_WM_PAINT")
@@ -774,7 +776,7 @@ Func NewItem()
 		$DisplayBuilder[$x + 1][0] = GUICtrlCreateCombo("", 35, 50 + 24 * $x, 185, 25, BitOr($CBS_DROPDOWNLIST, $WS_VSCROLL)) ; Choix du Jet
 		GUICtrlSetState(-1, $GUI_HIDE)
 		For $i = 2 To $NbRunes Step 1 ; Envois des données des différents types de jets dans le choix du Jet
-			GUICtrlSetData($DisplayBuilder[$x + 1][0], $Rune[$i][5])
+			GUICtrlSetData($DisplayBuilder[$x + 1][0], $Rune[$i][RuneIndex($BonusName)])
 		Next
 		_GUICtrlComboBox_SetCurSel($DisplayBuilder[$x + 1][0], 0)
 		$DisplayBuilder[$x + 1][1] = GUICtrlCreateInput("0", 230, 52 + 24 * $x, 40, 20); Input du jet Minimum
@@ -902,7 +904,7 @@ Func SetDataList($tmp)
 	For $i = 1 To $NbRunes Step 1 ;Remplissage de la Liste
 		If $Rune[$i][3] = $tmp Then
 			If $Filtre = True And _ArraySearch($Item, $Rune[$i][5], 0, 0, 1, 0, 1, 6) = -1 Then ContinueLoop
-			GUICtrlSetData($ListRune, $Rune[$i][0])
+			GUICtrlSetData($ListRune, $Rune[$i][RuneIndex($RuneName)])
 		EndIf
 	Next
 	Return -1
@@ -936,14 +938,29 @@ Func LoadPlatform($tmp)
  EndFunc   ;==>LoadPlatform
 
 Func ChangeLanguage($tmp)
-   If $tmp = $French Then
-		MsgBox(0, "Langue", "Français")
+    If $tmp = $French Then
+	    $Language = $French
 	ElseIf $tmp = $English Then
-		MsgBox(0, "Language", "English")
-	Else
+        $Language = $English
+    Else
 		Return
-	EndIf
+    EndIf
+    ResetAll()
  EndFunc   ;==>ChangeLanguage
+
+Func RuneIndex($tmp)
+    If $tmp = $RuneName And $Language = $French Then
+	    Return 0
+	ElseIf $tmp = $BonusName And $Language = $French Then
+	    Return 5
+	ElseIf $tmp = $RuneName And $Language = $English Then
+	    Return 7
+	ElseIf $tmp = $BonusName And $Language = $English Then
+	    Return 8
+	Else
+		Return $tmp
+	EndIf
+ EndFunc   ;==>RuneIndex
 
 Func ResetAll()
 	GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
