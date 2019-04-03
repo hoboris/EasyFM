@@ -1,0 +1,80 @@
+KEY,VALUEFR,VALUEEN
+debug,Debug mode activé,Debug mode activated
+title,EasyFM - Service Forgemagie,EasyFM - Smithmagic Services
+file,Fichier,File
+new,Nouveau Objet,New Item
+load,Charger Objet...,Load Item...
+save,Sauvegarder Objet...,Save Item...
+quit,Quitter,Quit
+session,Session,Session
+current_item,Objet en cours,Current item
+used_runes,Runes Utilisées,Used Runes
+platform,Plateforme,Platform
+language,Langue,Language
+french,Français,French
+english,Anglais,English
+help,Aide,Help
+report_bug,Signaler un Bug,Report a Bug
+about,A propos de EasyFM,About EasyFM
+combine,Fusionner,Combine
+reset,Reset,Reset
+characteristics,Caractéristiques,Characteristics
+damage,Dommages,Damage
+resistance,Résistances,Resistance
+special,Spéciales,Special
+other,Autres,Other
+new,Nouveau,New
+item_bonus,Objet - Bonus,Item - Bonus
+rune,Rune,Rune
+workshop,Atelier,Workshop
+info,Informations Annexes,Additional Information
+sink,Puits,Sink
+result,Résultat,Result
+prob,Probabilités,Probability
+hide_exo,Masquer Runes Exo.,Hide Exo. Runes
+copyright,Certaines illustrations sont la propriété d'Ankama Studio et de Dofus. Tous droits réservés. ExiTeD© 2009-2010. ,Some illustrations are the property of Ankama Studio and Dofus. All rights reserved. ExiTeD© 2009-2010. 
+select_item,Sélectionnez votre objet,Select your item
+close_app,Fermer L'application,Close the app
+confirm_quit,Etes vous sur de vouloir Quitter ?,Are you sure you want to quit ?
+item,Objet,Item
+select_rune,En sélectionnant une rune c'est mieux !,It's better if you select a rune !
+exo_error_1,Impossible d'ajouter 2 Exotique,Impossible to add 2 Exotic
+critical_success,Succès Critique !,Critical Success !
+neutral_success,Succès Neutre !,Neutral Success !
+critical_failure,Echec Critique !,Critical Failure !
+sink_absorption,...Le puits absorbe la perte...,…The sink absorbs the loss…
+average,Moyenne,Average
+cs_info,Pas d'exo et pas d'over max ; SC inférieur à 15%,No exo and no overmax ; CS under 15%
+cf_info,Pas d'exo et pas d'over max ; EC supérieur à 35%,No exo and no overmax ; CF over 35%
+exo_info,Tentative à 1% exotique,1% exotic attempt
+exo_error_2,Trop d'exotique ou d'overmax présent sur l'objet,Too many exotic or overmax on the item
+over_error,Tentative d'overmax trop haute,Overmax attempt too high
+rune_no,Rune n° ,Rune no. 
+select_rune,Selectionnez une rune,Select a rune
+current_pwr,PWRactuel : ,CurrentPWR : 
+max_pwr,PWRmaxi : ,MaxPWR : 
+stat_state,Etat Jet : ,Stat state : 
+pwrg_state,Etat PWRG : ,PWRG state : 
+cs,SC : ,CS : 
+ns,SN : ,NS : 
+cf,EC : ,CF : 
+current_pwrg,PWRGactuel : ,CurrentPWRG : 
+rune_space,Rune ,Rune 
+pwr,PWR : ,PWR : 
+bonus,Bonus : +,Bonus : +
+sink_reset,Puits remit à Zéro !,Sink reset to zero !
+item_creation,Création d'un Objet,Item creation
+item_configuration,Réglages de L'objet,Item configuration
+confirm_stats,J'ai tout bien rempli,I have filled everything
+number_stats,Nombre de Jets,Number of Stats
+item_level,Niveau de L'objet,Item level
+stats_configuration,Réglages des Jets,Stats configuration
+stat_type,Type de Jet,Stat type
+min,MIN,MIN
+max,MAX,MAX
+current,Actuel,Current
+stat_max_one_1,Pour les jets dont le maximum ,For the stats with a maximum of 
+stat_max_one_2,est 1 laisser Min = 0 Max = 1 ,1 leave Min = 0 Max = 1
+submit,Valider,Submit
+max_pwrg,PWRGmaximal : ,MaxPWRG : 
+name_item,Nommez votre objet,Name your item
