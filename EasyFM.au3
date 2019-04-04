@@ -76,34 +76,37 @@ Global Enum $Dofus, $DofusTouch
 Global Enum $French, $English
 Global Enum $RuneName, $BonusName
 Global $Language = $English
+Global $sFileMap2 = @ScriptDir & "\EasyFM\bin\Translation.csv"
+Global $NbStrings = _FileCountLines($sFileMap2)
+Global $String[$NbStrings + 1][2]
+_FileReadToArray2D($sFileMap2, $String, ",")
 
 GUI()
 Func GUI()
-	$GUIGlobal = GUICreate("EasyFM - Service Forgemagie", 585, 540)
+	$GUIGlobal = GUICreate(StringWithKey("title"), 585, 540)
 	GUISetIcon(@ScriptDir & "\EasyFM\images\easyFM.ico")
 	GUISetFont(10, 400, 0, "Tahoma")
 	GUISetBkColor(0xBBAE98)
-	$MenuNouveau = GUICtrlCreateMenu("Fichier")
-	$SubMenuNouveau1 = GUICtrlCreateMenuItem("Nouveau Objet", $MenuNouveau)
-	$SubMenuNouveau3 = GUICtrlCreateMenuItem("Charger Objet...", $MenuNouveau)
-	$SubMenuNouveau2 = GUICtrlCreateMenuItem("Sauvegarder Objet...", $MenuNouveau)
-	$SubMenuNouveau4 = GUICtrlCreateMenuItem("Quitter", $MenuNouveau)
-	$MenuAffichage = GUICtrlCreateMenu("Session")
-	$SubMenuAffichage1 = GUICtrlCreateMenuItem("Objet en cours", $MenuAffichage)
-	$SubMenuAffichage2 = GUICtrlCreateMenuItem("Runes Utilisées", $MenuAffichage)
-	$MenuPlateforme = GUICtrlCreateMenu("Plateforme")
+	$MenuNouveau = GUICtrlCreateMenu(StringWithKey("file"))
+	$SubMenuNouveau1 = GUICtrlCreateMenuItem(StringWithKey("new_item"), $MenuNouveau)
+	$SubMenuNouveau3 = GUICtrlCreateMenuItem(StringWithKey("load_item"), $MenuNouveau)
+	$SubMenuNouveau2 = GUICtrlCreateMenuItem(StringWithKey("save_item"), $MenuNouveau)
+	$SubMenuNouveau4 = GUICtrlCreateMenuItem(StringWithKey("quit"), $MenuNouveau)
+	$MenuAffichage = GUICtrlCreateMenu(StringWithKey("session"))
+	$SubMenuAffichage1 = GUICtrlCreateMenuItem(StringWithKey("current_item"), $MenuAffichage)
+	$SubMenuAffichage2 = GUICtrlCreateMenuItem(StringWithKey("used_runes"), $MenuAffichage)
+	$MenuPlateforme = GUICtrlCreateMenu(StringWithKey("platform"))
 	$SubMenuPlateforme1 = GUICtrlCreateMenuItem("Dofus", $MenuPlateforme)
 	$SubMenuPlateforme2 = GUICtrlCreateMenuItem("Dofus Touch", $MenuPlateforme)
-	$MenuLangue = GUICtrlCreateMenu("Langue")
-	$SubMenuLangue1 = GUICtrlCreateMenuItem("Français", $MenuLangue)
-	$SubMenuLangue2 = GUICtrlCreateMenuItem("Anglais", $MenuLangue)
-	$MenuAide = GUICtrlCreateMenu("Aide")
-;~ 	$SubMenuAide1 = GUICtrlCreateMenuItem("Aide en Ligne", $MenuAide)
-	$SubMenuAide2 = GUICtrlCreateMenuItem("Signaler un Bug", $MenuAide)
-	$SubMenuAide3 = GUICtrlCreateMenuItem("A propos de EasyFM", $MenuAide)
+	$MenuLangue = GUICtrlCreateMenu(StringWithKey("language"))
+	$SubMenuLangue1 = GUICtrlCreateMenuItem(StringWithKey("french"), $MenuLangue)
+	$SubMenuLangue2 = GUICtrlCreateMenuItem(StringWithKey("english"), $MenuLangue)
+	$MenuAide = GUICtrlCreateMenu(StringWithKey("help"))
+	$SubMenuAide2 = GUICtrlCreateMenuItem(StringWithKey("report_bug"), $MenuAide)
+	$SubMenuAide3 = GUICtrlCreateMenuItem(StringWithKey("about"), $MenuAide)
 
-	$ButtonFusionner = GUICtrlCreateButton("Fusionner", 300, 255, 100, 30, $BS_DEFPUSHBUTTON)
-	$ButtonRAZ = GUICtrlCreateButton("Reset", 330, 310, 40, 20)
+	$ButtonFusionner = GUICtrlCreateButton(StringWithKey("combine"), 300, 255, 100, 30, $BS_DEFPUSHBUTTON)
+	$ButtonRAZ = GUICtrlCreateButton(StringWithKey("reset"), 330, 310, 40, 20)
 	GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
 	GUICtrlSetState($ButtonRAZ, $GUI_DISABLE)
 	$Treeview = GUICtrlCreateTreeView(290, 50, 160, 90, BitOR($TVS_HASBUTTONS, $TVS_HASLINES, $TVS_LINESATROOT, $TVS_DISABLEDRAGDROP, $TVS_SHOWSELALWAYS), $WS_EX_CLIENTEDGE)
@@ -113,31 +116,31 @@ Func GUI()
 	$LabelRune = GUICtrlCreatePic($sFileCore & "Listrune.bmp", 460, 20, 100, 26)
 	GUICtrlSetColor($LabelRune, 0x006020)
 	GUICtrlSetFont($LabelRune, 11, 800)
-	$CaracItem = GUICtrlCreateTreeViewItem("Caractéristiques", $Treeview)
+	$CaracItem = GUICtrlCreateTreeViewItem(StringWithKey("characteristics"), $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "CaracTreeView.bmp")
-	$DoItem = GUICtrlCreateTreeViewItem("Dommages", $Treeview)
+	$DoItem = GUICtrlCreateTreeViewItem(StringWithKey("damage"), $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "NotUsedTreeView.bmp")
-	$ResItem = GUICtrlCreateTreeViewItem("Résistances", $Treeview)
+	$ResItem = GUICtrlCreateTreeViewItem(StringWithKey("resistance"), $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "ResTreeView.bmp")
-	$SpecItem = GUICtrlCreateTreeViewItem("Spéciales", $Treeview)
+	$SpecItem = GUICtrlCreateTreeViewItem(StringWithKey("special"), $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "SpecialTreeView.bmp")
-	$AutreItem = GUICtrlCreateTreeViewItem("Autres", $Treeview)
+	$AutreItem = GUICtrlCreateTreeViewItem(StringWithKey("other"), $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "AutresTreeView.bmp")
-	$NouveauItem = GUICtrlCreateTreeViewItem("Nouveau", $Treeview)
+	$NouveauItem = GUICtrlCreateTreeViewItem(StringWithKey("new"), $Treeview)
 	GUICtrlSetImage(-1, $sFileCore & "NotUsedTreeView.bmp")
 	$ListRune = GUICtrlCreateList("", 460, 50, 110, 290, "", $WS_EX_CLIENTEDGE)
 	GUICtrlSetFont($ListRune, 9.5, 800)
-	GUICtrlCreateGroup("Objet - Bonus", 4, 0, 270, 360)
-	GUICtrlCreateGroup("Rune", 290, 150, 164, 100)
-	GUICtrlCreateGroup("Atelier", 280, 0, 300, 340)
-	GUICtrlCreateGroup("Informations Annexes", 280, 340, 300, 144)
-	GUICtrlCreateGroup("Puits", 280, 290, 100, 50)
-	GUICtrlCreateGroup("Résultat", 4, 360, 270, 100)
-	GUICtrlCreateGroup("Probabilités", 280, 430, 300, 54)
-	$FiltreRune = GUICtrlCreateCheckbox("Masquer Runes Exo.", 340, 140, 110, 16)
+	GUICtrlCreateGroup(StringWithKey("item_bonus"), 4, 0, 270, 360)
+	GUICtrlCreateGroup(StringWithKey("rune"), 290, 150, 164, 100)
+	GUICtrlCreateGroup(StringWithKey("workshop"), 280, 0, 300, 340)
+	GUICtrlCreateGroup(StringWithKey("info"), 280, 340, 300, 144)
+	GUICtrlCreateGroup(StringWithKey("sink"), 280, 290, 100, 50)
+	GUICtrlCreateGroup(StringWithKey("result"), 4, 360, 270, 100)
+	GUICtrlCreateGroup(StringWithKey("prob"), 280, 430, 300, 54)
+	$FiltreRune = GUICtrlCreateCheckbox(StringWithKey("hide_exo"), 340, 140, 110, 16)
 	GUICtrlSetFont($FiltreRune, 8, 400)
 	$Marks = GUICtrlCreatePic($sFileCore & "bannière.jpg", 3, 462, 274, 40)
-	$Copyrights = GUICtrlCreateLabel("Certaines illustrations sont la propriété d'Ankama Studio et de Dofus. Tous droits réservés. ExiTeD© 2009-2010. ", 290, 490, 300, 23)
+	$Copyrights = GUICtrlCreateLabel(StringWithKey("copyright"), 290, 490, 300, 23)
 	GUICtrlSetFont($Copyrights, 7, 400)
 	$Enclume = GUICtrlCreatePic($sFileCore & "enclume.bmp", 200, 390, 70, 63)
 	$Levier = GUICtrlCreatePic($sFileCore & "levier.bmp", 400, 270, 52, 66)
@@ -201,6 +204,7 @@ Func GUI()
 				If $IndexRune <> -1 Then
 					DisplayRuneDesc($ReadRune)
 					DisplayAnnexe($ReadRune)
+					GUICtrlSetState($ButtonFusionner, $GUI_ENABLE)
 				EndIf
 			Case $msg = $FiltreRune
 				If GUICtrlRead($FiltreRune) = 1 Then ; Coché
@@ -209,18 +213,24 @@ Func GUI()
 					$Filtre = False
 				EndIf
 				SetDataList(GUICtrlRead($Treeview) - 18)
-			Case $msg = $CaracItem
+			 Case $msg = $CaracItem
 				SetDataList(1)
+				GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
 			Case $msg = $DoItem
 				SetDataList(2)
+				GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
 			Case $msg = $ResItem
 				SetDataList(3)
+				GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
 			Case $msg = $SpecItem
 				SetDataList(4)
+				GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
 			Case $msg = $AutreItem
 				SetDataList(5)
+				GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
 			Case $msg = $NouveauItem
 				SetDataList(6)
+				GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)
 			Case $msg = $ButtonFusionner
 				Forgemagie(GUICtrlRead($ListRune))
 			Case $msg = $SubMenuNouveau1
@@ -228,22 +238,22 @@ Func GUI()
 			Case $msg = $SubMenuNouveau2
 				SaveItem()
 			Case $msg = $SubMenuNouveau3
-				Local $File = FileSaveDialog("Sélectionnez votre objet", @ScriptDir, "Text files (*.txt)")
+				Local $File = FileSaveDialog(StringWithKey("select_item"), @ScriptDir, "Text files (*.txt)")
 				If Not @error Then
 					LoadItem($File)
 				EndIf
 			Case $msg = $SubMenuNouveau4
-				$AskQuit = MsgBox(3, "Fermer L'application", "Êtes vous sûr de vouloir Quitter ?")
+				$AskQuit = MsgBox(3, StringWithKey("close_app"), StringWithKey("confirm_quit"))
 				If $AskQuit = 6 Then Exit
 			Case $msg = $SubMenuAide2
 				ShellExecute("https://github.com/hoboris/EasyFM/issues")
 			Case $msg = $SubMenuAide3
-				MsgBox(0, "A propos de EasyFM", "EasyFM v" & FileGetVersion(@ScriptName) & " Beta")
+				MsgBox(0, StringWithKey("about"), "EasyFM v" & FileGetVersion(@ScriptName) & " Beta")
 			Case $msg = $SubMenuAffichage1
-				_ArrayDisplay($Item, "Objet")
+				_ArrayDisplay($Item, StringWithKey("item"))
 			Case $msg = $SubMenuAffichage2
 				_ArraySort($RuneLog, 1, 0, 0, 1)
-				_ArrayDisplay($RuneLog, "Runes Utilisées")
+				_ArrayDisplay($RuneLog, StringWithKey("used_runes"))
 			Case $msg = $SubMenuPlateforme1
 				LoadPlatform($Dofus)
 			Case $msg = $SubMenuPlateforme2
@@ -259,9 +269,9 @@ Func GUI()
 EndFunc   ;==>GUI
 
 Func Forgemagie($tmp)
-	$Iindex = _ArraySearch($Rune, $tmp, 0, 0, 1, 0, 1, 0) ;Recherche indice de la rune
+	$Iindex = _ArraySearch($Rune, $tmp, 0, 0, 1, 0, 1, RuneIndex($RuneName)) ;Recherche indice de la rune
 	If $Iindex = -1 Then
-		GUICtrlSetData($Resultat[0], "En sélectionnant une rune c'est mieux !")
+		GUICtrlSetData($Resultat[0], StringWithKey("select_rune"))
 		GUICtrlSetData($Resultat[1], "")
 		GUICtrlSetData($Resultat[2], "")
 		GUICtrlSetData($Resultat[3], "")
@@ -272,7 +282,7 @@ Func Forgemagie($tmp)
 		$RIndex = UBound($Item) - 1
 		If $Item[UBound($Item) - 1][0] = 0 Then CreateExotique($Iindex)
 		If $Rune[$Iindex][RuneIndex($BonusName)] <> $Item[UBound($Item) - 1][6] Then
-			GUICtrlSetData($Resultat[0], "Impossible d'ajouter 2 Exotique")
+			GUICtrlSetData($Resultat[0], StringWithKey("exo_error_1"))
 			GUICtrlSetData($Resultat[1], "")
 			GUICtrlSetData($Resultat[2], "")
 			GUICtrlSetData($Resultat[3], "")
@@ -290,16 +300,16 @@ Func Forgemagie($tmp)
 	Select
 		Case $Random = 1 ;SC
 			Gain()
-			$Res = "Succès Critique !"
+			$Res = StringWithKey("critical_success")
 			$color = "0x006600"
 		Case $Random = 2 ;SN
 			Gain()
 			Perte()
-			$Res = "Succès Neutre !"
+			$Res = StringWithKey("neutral_success")
 			$color = "0xAD4F09"
 		Case $Random = 3 ;EC
 			Perte()
-			$Res = "Echec Critique !"
+			$Res = StringWithKey("critical_failure")
 			$color = "0x960018"
 	EndSelect
 	$Fusion = $Fusion + 1
@@ -322,7 +332,7 @@ Func CreateExotique($Runeindex)
 	$Item[$x][2] = 0 ;Jet_min
 	$Item[$x][3] = Floor(100 / $Rune[$Runeindex][1]) ;Jet_max
 	$Item[$x][6] = $Rune[$Runeindex][RuneIndex($BonusName)] ;Nom du Jet
-	$Index = _ArraySearch($Rune, $Item[$x][6], 0, 0, 0, 0, 1, 5) ; Index de la rune correspondant au Jet
+	$Index = _ArraySearch($Rune, $Item[$x][6], 0, 0, 0, 0, 1, RuneIndex($BonusName)) ; Index de la rune correspondant au Jet
 	$Item[$x][4] = Round($Rune[$Index][1] / $Rune[$Runeindex][2], 2) ;PWR pour 1
 	$Item[$x][5] = $Item[$x][3] * $Item[$x][4] ;PWR_MAX
 	$Item[$x][7] = "0x006600" ;Couleur d'affichage
@@ -359,7 +369,7 @@ EndFunc   ;==>Gain
 Func Perte()
 	$PwrPerte = Number($Rune[$Iindex][1]) ;calcul du poids à perdre
 	If $Puits >= $PwrPerte And $Puits > 0 Then ; Si le puits est supérieur à la perte et s'il y a du puits
-		GUICtrlSetData($Resultat[2], "...Le puits absorbe la perte...")
+		GUICtrlSetData($Resultat[2], StringWithKey("sink_absorption"))
 		$Puits = $Puits - $PwrPerte ; Le puits diminue
 		Return 1
 	Else
@@ -448,7 +458,7 @@ Func CalculResultat($SelectionResutat, $IndexJet, $IndexRune) ; Param : Choisis 
 	$Moy = ((3 * $TMP2) + (2 * $tmp)) / 5
 	$Moy2 = Sqrt(((3 * $tmp / 5) * (3 * $tmp / 5)) + ((2 * $TMP2 / 5) * (2 * $TMP2 / 5)))
 
-	ConsoleWrite("PWR: " & $tmp & " | PWRG : " & $TMP2 & " |Moyenne1 : " & $Moy & " | Moyenne2 : " & $Moy2 & @CRLF)
+	ConsoleWrite(StringWithKey("pwr") & $tmp & " | " & StringWithKey("pwrg") & $TMP2 & " | " & StringWithKey("average") & "1 : " & $Moy & " | " & StringWithKey("average") & "2 : " & $Moy2 & @CRLF)
 
 	If $EtatPWR * 100 < 1 Then $EtatPWR = 0
 	If $EtatPWRG * 100 < 1 Then $EtatPWRG = 0
@@ -485,26 +495,26 @@ Func CalculResultat($SelectionResutat, $IndexJet, $IndexRune) ; Param : Choisis 
 	$PercentSC = Floor($PercentSC * $CoefLvl * $CoefRune * $CoefOvermax)
 
 	If Not $CheckExotique And Not $CheckOverMax And $PercentSC < 15 Then
-		ConsoleWrite("Pas d'exo et pas d'over max , SC inférieur à 15%" & @CRLF)
+		ConsoleWrite(StringWithKey("cs_info") & @CRLF)
 		$PercentSN = $PercentSN - (15 - $PercentSC)
 		$PercentSC = 15
 	EndIf
 	$PercentEC = 100 - ($PercentSC + $PercentSN)
 	If Not $CheckExotique And Not $CheckOverMax And $PercentEC > 35 Then
-		ConsoleWrite("Pas d'exo et pas d'over max , EC supérieur à 35%" & @CRLF)
+		ConsoleWrite(StringWithKey("cf_info") & @CRLF)
 		$PercentSN = $PercentSN - ($PercentEC - 35)
 		$PercentEC = 35
 	EndIf
 
 	If $CheckExotique And $Rune[$IndexRune][1] > 50 Then
-		ConsoleWrite("Tentative à 1% exotique" & @CRLF)
+		ConsoleWrite(StringWithKey("exo_info") & @CRLF)
 		$PercentEC = 99
 		$PercentSC = 1
 		$PercentSN = 0
 	EndIf
 
 	If GetPWRGoveretExo() + $Rune[$IndexRune][1] > 100 Then
-		ConsoleWrite("Trop d'exotique ou d'overmax présent sur l'objet" & @CRLF)
+		ConsoleWrite(StringWithKey("exo_error_2") & @CRLF)
 		$PercentEC = 100
 		$PercentSC = 0
 		$PercentSN = 0
@@ -512,7 +522,7 @@ Func CalculResultat($SelectionResutat, $IndexJet, $IndexRune) ; Param : Choisis 
 
 	If Number($Item[$IndexJet][0]) + Number($Rune[$IndexRune][2]) > Number($Item[$IndexJet][3]) Then
 		If Number($Item[$IndexJet][0]) + Number($Rune[$IndexRune][2]) > (100 - Number($Item[$IndexJet][3]) * Number($Item[$IndexJet][4])) / (Number($Item[$IndexJet][4] * 2)) + Number($Item[$IndexJet][3]) Then
-			ConsoleWrite("Tentative d'overmax trop haute" & @CRLF)
+			ConsoleWrite(StringWithKey("over_error") & @CRLF)
 			$PercentEC = 100
 			$PercentSC = 0
 			$PercentSN = 0
@@ -524,7 +534,7 @@ Func CalculResultat($SelectionResutat, $IndexJet, $IndexRune) ; Param : Choisis 
 		$PercentSN = 0
 	EndIf
 
-	ConsoleWrite("CheckOver = " & $CheckOverMax & " | CheckExo = " & $CheckExotique & " | CoefOvermax = " & $CoefOvermax & " | CoefRune = " & $CoefRune & " | CoefLvl = " & $CoefLvl & " | SC = " & $PercentSC & " | SN = " & $PercentSN & " | EC = " & $PercentEC & @CRLF & @CRLF)
+	ConsoleWrite("CheckOver = " & $CheckOverMax & " | CheckExo = " & $CheckExotique & " | CoefOvermax = " & $CoefOvermax & " | CoefRune = " & $CoefRune & " | CoefLvl = " & $CoefLvl & " | " & StringWithKey("cs") & " = " & $PercentSC & " | " & StringWithKey("ns") & " = " & $PercentSN & " | " & StringWithKey("cf") & " = " & $PercentEC & @CRLF & @CRLF)
 	If $SelectionResutat Then SelectionResultat()
 	Return -1
 EndFunc   ;==>CalculResultat
@@ -572,7 +582,7 @@ EndFunc   ;==>ChercherLeJetQuiBaisse
 
 Func DisplayResultat()
 	GUICtrlSetData($Resultat[3], "") ; Effacer le message 'Puits remit à zéro'
-	GUICtrlSetData($Resultat[0], "Rune n° " & $Fusion)
+	GUICtrlSetData($Resultat[0], StringWithKey("rune_no") & $Fusion)
 	GUICtrlSetData($Resultat[1], $Res)
 	GUICtrlSetColor($Resultat[1], $color)
 	Return -1
@@ -580,24 +590,24 @@ EndFunc   ;==>DisplayResultat
 
 Func DisplayAnnexe($tmp)
 	Local $Oindex = _ArraySearch($Rune, $tmp, 0, 0, 0, 0, 1, RuneIndex($RuneName)) ;Recherche indice de la rune
-	If $Oindex = -1 Then Return Msg("Selectionnez une rune")
-	Local $ZIndex = _ArraySearch($Item, $Rune[$Oindex][5], 0, 0, 1, 0, 1, 6) ;Recherche de la ligne du jet correspondant à la rune
+	If $Oindex = -1 Then Return Msg(StringWithKey("select_rune_2"))
+	Local $ZIndex = _ArraySearch($Item, $Rune[$Oindex][RuneIndex($BonusName)], 0, 0, 1, 0, 1, 6) ;Recherche de la ligne du jet correspondant à la rune
 	If $ZIndex = -1 Then $ZIndex = UBound($Item) - 1
 
 	CalculResultat(False, $ZIndex, $Oindex)
-	GUICtrlSetData($Annexe[2], "PWRactuel : " & Round(Number($Item[$ZIndex][1])))
-	GUICtrlSetData($Annexe[3], "PWRmaxi : " & Number($Item[$ZIndex][3]) * Number($Item[$ZIndex][4]))
+	GUICtrlSetData($Annexe[2], StringWithKey("current_pwr") & Round(Number($Item[$ZIndex][1])))
+	GUICtrlSetData($Annexe[3], StringWithKey("max_pwr") & Number($Item[$ZIndex][3]) * Number($Item[$ZIndex][4]))
 	If $Item[$ZIndex][0] <> 0 Then
-		GUICtrlSetData($Annexe[5], "Etat Jet : " & Round((Number($Item[$ZIndex][0]) - Number($Item[$ZIndex][2])) / (Number($Item[$ZIndex][3]) - Number($Item[$ZIndex][2])) * 100) & "%")
-		GUICtrlSetData($Annexe[4], "Etat PWRG : " & Round(GetPWRGactuel(False) / GetPWRGmax() * 100) & "%")
+		GUICtrlSetData($Annexe[5], StringWithKey("stat_state") & Round((Number($Item[$ZIndex][0]) - Number($Item[$ZIndex][2])) / (Number($Item[$ZIndex][3]) - Number($Item[$ZIndex][2])) * 100) & "%")
+		GUICtrlSetData($Annexe[4], StringWithKey("pwrg_state") & Round(GetPWRGactuel(False) / GetPWRGmax() * 100) & "%")
 	Else
-		GUICtrlSetData($Annexe[4], "Etat PWRG : 0%")
-		GUICtrlSetData($Annexe[5], "Etat Jet : 0%")
+		GUICtrlSetData($Annexe[4], StringWithKey("pwrg_state") & "0%")
+		GUICtrlSetData($Annexe[5], StringWithKey("stat_state") & "0%")
 	EndIf
-	GUICtrlSetData($Annexe[6], "SC : " & $PercentSC & "%")
-	GUICtrlSetData($Annexe[7], "SN : " & $PercentSN & "%")
-	GUICtrlSetData($Annexe[8], "EC : " & $PercentEC & "%")
-	GUICtrlSetData($Annexe[0], "PWRGactuel : " & Round(GetPWRGactuel(False)))
+	GUICtrlSetData($Annexe[6], StringWithKey("cs") & " : " & $PercentSC & "%")
+	GUICtrlSetData($Annexe[7], StringWithKey("ns") & " : " & $PercentSN & "%")
+	GUICtrlSetData($Annexe[8], StringWithKey("cf") & " : " & $PercentEC & "%")
+	GUICtrlSetData($Annexe[0], StringWithKey("current_pwrg") & Round(GetPWRGactuel(False)))
 	Return -1
 EndFunc   ;==>DisplayAnnexe
 
@@ -641,9 +651,9 @@ Func DisplayPuits()
 EndFunc   ;==>DisplayPuits
 
 Func DisplayRuneDesc($tmp)
-	GUICtrlSetData($DisplayRune[0], "Rune " & $Rune[$IndexRune][RuneIndex($RuneName)])
-	GUICtrlSetData($DisplayRune[1], "PWR : " & $Rune[$IndexRune][1])
-	GUICtrlSetData($DisplayRune[2], "Bonus : +" & $Rune[$IndexRune][2])
+	GUICtrlSetData($DisplayRune[0], StringWithKey("rune") & " " & $Rune[$IndexRune][RuneIndex($RuneName)])
+	GUICtrlSetData($DisplayRune[1], StringWithKey("pwr") & $Rune[$IndexRune][1])
+	GUICtrlSetData($DisplayRune[2], StringWithKey("bonus") & $Rune[$IndexRune][2])
 
 	_GDIPlus_Startup()
 	$hImage = _GDIPlus_ImageLoadFromFile(@ScriptDir & "\EasyFM\images\runes\None.png")
@@ -710,7 +720,7 @@ EndFunc   ;==>ComparerLesItems
 
 Func ResetPuits()
 	$Puits = 0
-	GUICtrlSetData($Resultat[3], "Puits remit à Zéro !")
+	GUICtrlSetData($Resultat[3], StringWithKey("sink_reset"))
 	DisplayPuits()
 	Return -1
 EndFunc   ;==>ResetPuits
@@ -736,33 +746,33 @@ Func NewItem()
 	$DisplayBuilder = 0
 	Local $DisplayBuilder[62][5]
 	#Region ### START Koda GUI section ### Form=
-	$Form1 = GUICreate("Création d'un Objet", 600, 450)
+	$Form1 = GUICreate(StringWithKey("item_creation"), 600, 450)
 	GUISetIcon(@ScriptDir & "\EasyFM\images\easyFM.ico")
 	GUISetFont(10, 400, 0, "Tahoma")
-	$Group1 = GUICtrlCreateGroup("Réglages de L'objet", 408, 8, 189, 130)
+	$Group1 = GUICtrlCreateGroup(StringWithKey("item_configuration"), 408, 8, 189, 130)
 	$Input2 = GUICtrlCreateInput("0", 530, 78, 57, 21)
-	$Checkbox = GUICtrlCreateCheckbox("J'ai tout bien rempli", 430, 110, 200, 17)
-	$Label1 = GUICtrlCreateLabel("Nombre de Jets", 424, 40, 90, 17)
-	$Label2 = GUICtrlCreateLabel("Niveau de L'objet", 424, 80, 100, 17)
+	$Checkbox = GUICtrlCreateCheckbox(StringWithKey("confirm_stats"), 430, 110, 200, 17)
+	$Label1 = GUICtrlCreateLabel(StringWithKey("number_stats"), 424, 40, 90, 17)
+	$Label2 = GUICtrlCreateLabel(StringWithKey("item_level"), 424, 80, 100, 17)
 
 	Local $NBJ = GUICtrlCreateCombo("1", 520, 38, 65, 25, $CBS_DROPDOWNLIST)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-	$Group2 = GUICtrlCreateGroup("Réglages des Jets", 8, 8, 390, 433)
-	$Label4 = GUICtrlCreateLabel("Type de Jet", 85, 32, 80, 17)
+	$Group2 = GUICtrlCreateGroup(StringWithKey("stats_configuration"), 8, 8, 390, 433)
+	$Label4 = GUICtrlCreateLabel(StringWithKey("stat_type"), 85, 32, 80, 17)
 	GUICtrlSetColor(-1, 0x200040)
 	GUICtrlSetFont(-1, 9, 800)
-	$Label5 = GUICtrlCreateLabel("MIN", 240, 32, 45, 17)
+	$Label5 = GUICtrlCreateLabel(StringWithKey("min"), 240, 32, 45, 17)
 	GUICtrlSetColor(-1, 0x200040)
 	GUICtrlSetFont(-1, 9, 800)
-	$Label6 = GUICtrlCreateLabel("MAX", 284, 32, 45, 17)
+	$Label6 = GUICtrlCreateLabel(StringWithKey("max"), 284, 32, 45, 17)
 	GUICtrlSetColor(-1, 0x200040)
 	GUICtrlSetFont(-1, 9, 800)
-	$Label7 = GUICtrlCreateLabel("Actuel", 330, 32, 45, 17)
+	$Label7 = GUICtrlCreateLabel(StringWithKey("current"), 330, 32, 45, 17)
 	GUICtrlSetColor(-1, 0x200040)
 	GUICtrlSetFont(-1, 9, 800)
-	$Label8 = GUICtrlCreateLabel("Pour les jets dont le maximum " & @CRLF & "est 1 laisser Min = 0 Max = 1 ", 420, 320)
+	$Label8 = GUICtrlCreateLabel(StringWithKey("stat_max_one_1") & @CRLF & StringWithKey("stat_max_one_2"), 420, 320)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-	$MyButton1 = GUICtrlCreateButton("Valider", 448, 150, 52, 30, $BS_FLAT)
+	$MyButton1 = GUICtrlCreateButton(StringWithKey("submit"), 448, 150, 52, 30, $BS_FLAT)
 	GUICtrlSetState(-1, $GUI_DISABLE)
 	GUISetState(@SW_SHOW)
 	ControlFocus("", "", $NBJ)
@@ -821,7 +831,7 @@ Func NewItem()
 					$Item[$x][3] = GUICtrlRead($DisplayBuilder[$x][2]) ; Jet_max
 					$Item[$x][6] = GUICtrlRead($DisplayBuilder[$x][0]) ; Nom
 					$Item[$x][0] = GUICtrlRead($DisplayBuilder[$x][4]) ;Jet_Actuel
-					$Index = _ArraySearch($Rune, $Item[$x][6], 0, 0, 0, 0, 1, 5) ; Index de la rune correspondant au Jet
+					$Index = _ArraySearch($Rune, $Item[$x][6], 0, 0, 0, 0, 1, RuneIndex($BonusName)) ; Index de la rune correspondant au Jet
 					$Item[$x][4] = Round($Rune[$Index][1] / $Rune[$Index][2], 2) ;PWR pour 1
 					$Item[$x][1] = Floor($Item[$x][0] * $Item[$x][4]) ;PWR_ACTUEL
 					$Item[$x][5] = $Item[$x][3] * $Item[$x][4] ;PWR_MAX
@@ -834,9 +844,9 @@ Func NewItem()
 				$Fusion = 0
 				$NbJets = GUICtrlRead($NBJ)
 				GUICtrlDelete($HomeBG)
-				GUICtrlSetData($Annexe[0], "PWRGactuel : " & Round(GetPWRGactuel(False)))
-				GUICtrlSetData($Annexe[1], "PWRGmaximal : " & Round(GetPWRGmax()))
-				GUICtrlSetData($Annexe[4], "Etat PWRG : " & Round(GetPWRGactuel(False) / GetPWRGmax() * 100) & "%")
+				GUICtrlSetData($Annexe[0], StringWithKey("current_pwrg") & Round(GetPWRGactuel(False)))
+				GUICtrlSetData($Annexe[1], StringWithKey("max_pwrg") & Round(GetPWRGmax()))
+				GUICtrlSetData($Annexe[4], StringWithKey("pwrg_state") & Round(GetPWRGactuel(False) / GetPWRGmax() * 100) & "%")
 				GUICtrlSetState($ButtonFusionner, $GUI_ENABLE)
 				GUICtrlSetState($ButtonRAZ, $GUI_ENABLE)
 				GUIDelete($Form1)
@@ -852,7 +862,7 @@ Func NewItem()
 EndFunc   ;==>NewItem
 
 Func SaveItem()
-	Local $SaveDir = FileSaveDialog("Nommez votre objet", @ScriptDir, "Text files (*.txt)", 2, "Item.txt")
+	Local $SaveDir = FileSaveDialog(StringWithKey("name_item"), @ScriptDir, "Text files (*.txt)", 2, "Item.txt")
 	If Not @error Then
 		$Item[UBound($Item, 1) - 1][UBound($Item, 2) - 1] = $LvlItem
 		_FileWriteFromArray2D($SaveDir, $Item, 1)
@@ -868,9 +878,9 @@ Func LoadItem($LoadDir)
 	$Fusion = 0
 	$Puits = 0
 	GUICtrlDelete($HomeBG)
-	GUICtrlSetData($Annexe[0], "PWRGactuel : " & Round(GetPWRGactuel(False)))
-	GUICtrlSetData($Annexe[1], "PWRGmaxi : " & Round(GetPWRGmax()))
-	GUICtrlSetData($Annexe[4], "Etat PWRG : " & Round(GetPWRGactuel(False) / GetPWRGmax() * 100) & "%")
+	GUICtrlSetData($Annexe[0], StringWithKey("current_pwrg") & Round(GetPWRGactuel(False)))
+	GUICtrlSetData($Annexe[1], StringWithKey("max_pwrg") & Round(GetPWRGmax()))
+	GUICtrlSetData($Annexe[4], StringWithKey("pwrg_state") & Round(GetPWRGactuel(False) / GetPWRGmax() * 100) & "%")
 	GUICtrlSetState($ButtonFusionner, $GUI_ENABLE)
 	GUICtrlSetState($ButtonRAZ, $GUI_ENABLE)
 	ResetComparerObjet()
@@ -884,13 +894,15 @@ EndFunc   ;==>LoadItem
 ;~ ################ Fonctions Annexes #################
 
 Func UpdateLogRune($tmp)
-	Local $QIndex = _ArraySearch($RuneLog, "Rune " & $Rune[$tmp][0], 0, 0, 1, 0, 1, 0)
-	$RuneLog[$QIndex][1] = $RuneLog[$QIndex][1] + 1
+	Local $QIndex = _ArraySearch($RuneLog, StringWithKey("rune") & " " & $Rune[$tmp][RuneIndex($RuneName)], 0, 0, 1, 0, 1, 0)
+	If $QIndex <> -1 Then
+	  $RuneLog[$QIndex][1] = $RuneLog[$QIndex][1] + 1
+    EndIf
 EndFunc   ;==>UpdateLogRune
 
 Func ResetRuneLog()
 	For $x = 2 To UBound($Rune) - 1
-		$RuneLog[$x - 2][0] = "Rune " & $Rune[$x][0]
+		$RuneLog[$x - 2][0] = StringWithKey("rune") & " " & $Rune[$x][RuneIndex($RuneName)]
 		$RuneLog[$x - 2][1] = 0
 	Next
 EndFunc   ;==>ResetRuneLog
@@ -903,7 +915,7 @@ Func SetDataList($tmp)
 	GUICtrlSetData($ListRune, "") ;Mise à 0 de la Liste Rune
 	For $i = 1 To $NbRunes Step 1 ;Remplissage de la Liste
 		If $Rune[$i][3] = $tmp Then
-			If $Filtre = True And _ArraySearch($Item, $Rune[$i][5], 0, 0, 1, 0, 1, 6) = -1 Then ContinueLoop
+			If $Filtre = True And _ArraySearch($Item, $Rune[$i][RuneIndex($BonusName)], 0, 0, 1, 0, 1, 6) = -1 Then ContinueLoop
 			GUICtrlSetData($ListRune, $Rune[$i][RuneIndex($RuneName)])
 		EndIf
 	Next
@@ -938,14 +950,17 @@ Func LoadPlatform($tmp)
  EndFunc   ;==>LoadPlatform
 
 Func ChangeLanguage($tmp)
-    If $tmp = $French Then
-	    $Language = $French
-	ElseIf $tmp = $English Then
-        $Language = $English
-    Else
-		Return
-    EndIf
-    ResetAll()
+    If $tmp <> $Language Then
+	  If $tmp = $French Then
+		 $Language = $French
+	  ElseIf $tmp = $English Then
+		 $Language = $English
+	  Else
+		 Return
+	  EndIf
+	  GUIDelete()
+	  GUI()
+	EndIf
  EndFunc   ;==>ChangeLanguage
 
 Func RuneIndex($tmp)
@@ -961,6 +976,24 @@ Func RuneIndex($tmp)
 		Return $tmp
 	EndIf
  EndFunc   ;==>RuneIndex
+
+Func StringIndex()
+    If $Language = $English Then
+	    Return 2
+	Else
+	    Return 1
+	EndIf
+ EndFunc   ;==>StringIndex
+
+Func StringWithKey($tmp)
+    $IndexString = _ArraySearch($String, $tmp, 1, 0, 0, 0, 1, 0)
+	If $IndexString <> -1 Then
+	   Return $String[$IndexString][StringIndex()]
+    Else
+	   Msg("String " & $tmp & " not found")
+	   Return ""
+    EndIf
+ EndFunc   ;==>String
 
 Func ResetAll()
 	GUICtrlSetState($ButtonFusionner, $GUI_DISABLE)

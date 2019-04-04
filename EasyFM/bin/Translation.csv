@@ -1,10 +1,9 @@
 KEY,VALUEFR,VALUEEN
-debug,Debug mode activé,Debug mode activated
 title,EasyFM - Service Forgemagie,EasyFM - Smithmagic Services
 file,Fichier,File
-new,Nouveau Objet,New Item
-load,Charger Objet...,Load Item...
-save,Sauvegarder Objet...,Save Item...
+new_item,Nouveau Objet,New Item
+load_item,Charger Objet...,Load Item...
+save_item,Sauvegarder Objet...,Save Item...
 quit,Quitter,Quit
 session,Session,Session
 current_item,Objet en cours,Current item
@@ -50,17 +49,17 @@ exo_info,Tentative à 1% exotique,1% exotic attempt
 exo_error_2,Trop d'exotique ou d'overmax présent sur l'objet,Too many exotic or overmax on the item
 over_error,Tentative d'overmax trop haute,Overmax attempt too high
 rune_no,Rune n° ,Rune no. 
-select_rune,Selectionnez une rune,Select a rune
+select_rune_2,Selectionnez une rune,Select a rune
 current_pwr,PWRactuel : ,CurrentPWR : 
 max_pwr,PWRmaxi : ,MaxPWR : 
 stat_state,Etat Jet : ,Stat state : 
 pwrg_state,Etat PWRG : ,PWRG state : 
-cs,SC : ,CS : 
-ns,SN : ,NS : 
-cf,EC : ,CF : 
+cs,SC,CS
+ns,SN,NS
+cf,EC,CF
 current_pwrg,PWRGactuel : ,CurrentPWRG : 
-rune_space,Rune ,Rune 
 pwr,PWR : ,PWR : 
+pwrg,PWRG : ,PWRG : 
 bonus,Bonus : +,Bonus : +
 sink_reset,Puits remit à Zéro !,Sink reset to zero !
 item_creation,Création d'un Objet,Item creation
@@ -73,8 +72,8 @@ stat_type,Type de Jet,Stat type
 min,MIN,MIN
 max,MAX,MAX
 current,Actuel,Current
-stat_max_one_1,Pour les jets dont le maximum ,For the stats with a maximum of 
-stat_max_one_2,est 1 laisser Min = 0 Max = 1 ,1 leave Min = 0 Max = 1
+stat_max_one_1,Pour les jets dont le maximum ,For the stats with a maximum 
+stat_max_one_2,est 1 laisser Min = 0 Max = 1 ,of 1 leave Min = 0 Max = 1
 submit,Valider,Submit
 max_pwrg,PWRGmaximal : ,MaxPWRG : 
 name_item,Nommez votre objet,Name your item
