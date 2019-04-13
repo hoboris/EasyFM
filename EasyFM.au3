@@ -865,7 +865,7 @@ Func SaveItem()
 	Local $SaveDir = FileSaveDialog(StringWithKey("name_item"), @ScriptDir, "Text files (*.txt)", 2, "Item.txt")
 	If Not @error Then
 		$Item[UBound($Item, 1) - 1][UBound($Item, 2) - 1] = $LvlItem
-		_FileWriteFromArray2D($SaveDir, $Item, 1)
+		_FileWriteFromArray2D($SaveDir, $Item, 1, 0, 0, 0, ",")
 	EndIf
 	Return -1
 EndFunc   ;==>SaveItem
