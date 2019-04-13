@@ -77,3 +77,5 @@ stat_max_one_2,est 1 laisser Min = 0 Max = 1 ,of 1 leave Min = 0 Max = 1
 submit,Valider,Submit
 max_pwrg,PWRGmaximal : ,MaxPWRG : 
 name_item,Nommez votre objet,Name your item
+language_message_1,L'objet a été sauvegardé en ,The item has been saved in 
+language_message_2, veuillez réessayer apres le reset de l'interface, please try again after the interface reset

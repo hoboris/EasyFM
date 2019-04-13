@@ -877,6 +877,24 @@ Func LoadItem($LoadDir)
 	$NbJets = _FileCountLines($LoadDir)
 	$Fusion = 0
 	$Puits = 0
+
+   ; Changer la langue si les bonus de l'objet sauvegardé sont dans une langue différente de l'interface
+	For $i = 1 To $NbJets - 1 Step 1
+		If _ArraySearch($Rune, $Item[$i][6], 0, 0, 1, 0, 1, RuneIndex($BonusName)) = -1 Then
+			Local $NewLanguage, $LanguageStringKey
+			If $Language = $French Then
+			   $NewLanguage = $English
+			   $LanguageStringKey = "english"
+			ElseIf $Language = $English Then
+			   $NewLanguage = $French
+			   $LanguageStringKey = "french"
+			EndIf
+			MsgBox(0, StringWithKey("language"), StringWithKey("language_message_1") & StringWithKey($LanguageStringKey) & StringWithKey("language_message_2"))
+			ChangeLanguage($NewLanguage)
+			Return -1
+		EndIf
+    Next
+
 	GUICtrlDelete($HomeBG)
 	GUICtrlSetData($Annexe[0], StringWithKey("current_pwrg") & Round(GetPWRGactuel(False)))
 	GUICtrlSetData($Annexe[1], StringWithKey("max_pwrg") & Round(GetPWRGmax()))
