@@ -202,9 +202,11 @@ Func GUI()
 				$ReadRune = GUICtrlRead($ListRune)
 				$IndexRune = _ArraySearch($Rune, $ReadRune, 1, 0, 0, 0, 1, RuneIndex($RuneName))
 				If $IndexRune <> -1 Then
-					DisplayRuneDesc($ReadRune)
-					DisplayAnnexe($ReadRune)
-					GUICtrlSetState($ButtonFusionner, $GUI_ENABLE)
+					 DisplayRuneDesc($ReadRune)
+					 DisplayAnnexe($ReadRune)
+					 If $NbJets > 0 Then
+						GUICtrlSetState($ButtonFusionner, $GUI_ENABLE)
+					 EndIf
 				EndIf
 			Case $msg = $FiltreRune
 				If GUICtrlRead($FiltreRune) = 1 Then ; Coché
@@ -784,19 +786,29 @@ Func NewItem()
 
 	For $x = 0 To 16 - 1
 		$DisplayBuilder[$x + 1][0] = GUICtrlCreateCombo("", 35, 50 + 24 * $x, 185, 25, BitOr($CBS_DROPDOWNLIST, $WS_VSCROLL)) ; Choix du Jet
-		GUICtrlSetState(-1, $GUI_HIDE)
+		If $x <> 0 Then
+		   GUICtrlSetState(-1, $GUI_HIDE)
+	    EndIf
 		For $i = 2 To $NbRunes Step 1 ; Envois des données des différents types de jets dans le choix du Jet
 			GUICtrlSetData($DisplayBuilder[$x + 1][0], $Rune[$i][RuneIndex($BonusName)])
 		Next
 		_GUICtrlComboBox_SetCurSel($DisplayBuilder[$x + 1][0], 0)
 		$DisplayBuilder[$x + 1][1] = GUICtrlCreateInput("0", 230, 52 + 24 * $x, 40, 20); Input du jet Minimum
-		GUICtrlSetState(-1, $GUI_HIDE)
+		If $x <> 0 Then
+		   GUICtrlSetState(-1, $GUI_HIDE)
+		EndIf
 		$DisplayBuilder[$x + 1][2] = GUICtrlCreateInput("1", 280, 52 + 24 * $x, 40, 20) ; Input du jet Maximum
-		GUICtrlSetState(-1, $GUI_HIDE)
+		If $x <> 0 Then
+		   GUICtrlSetState(-1, $GUI_HIDE)
+		EndIf
 		$DisplayBuilder[$x + 1][3] = GUICtrlCreateLabel($x + 1, 14, 52 + 24 * $x, 14, 20, $SS_RIGHT) ; Label numéro du Jet
-		GUICtrlSetState(-1, $GUI_HIDE)
+		If $x <> 0 Then
+		   GUICtrlSetState(-1, $GUI_HIDE)
+		EndIf
 		$DisplayBuilder[$x + 1][4] = GUICtrlCreateInput("0", 330, 52 + 24 * $x, 40, 20) ; Input du jet actuel
-		GUICtrlSetState(-1, $GUI_HIDE)
+		If $x <> 0 Then
+		   GUICtrlSetState(-1, $GUI_HIDE)
+	    EndIf
 	Next
 
 	While 1
