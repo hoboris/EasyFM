@@ -65,7 +65,7 @@ sink_reset,Puits remit à Zéro !,Sink reset to zero !
 item_creation,Création d'un Objet,Item creation
 item_configuration,Réglages de L'objet,Item configuration
 confirm_stats,J'ai tout bien rempli,I have filled everything
-number_stats,Nombre de Jets,Number of Stats
+number_stats,Nombre de Jets,Nb of Stats
 item_level,Niveau de L'objet,Item level
 stats_configuration,Réglages des Jets,Stats configuration
 stat_type,Type de Jet,Stat type
