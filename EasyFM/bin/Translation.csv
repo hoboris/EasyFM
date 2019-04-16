@@ -50,16 +50,29 @@ exo_error_2,Trop d'exotique ou d'overmax présent sur l'objet,Too many exotic or 
 over_error,Tentative d'overmax trop haute,Overmax attempt too high
 rune_no,Rune n° ,Rune no. 
 select_rune_2,Selectionnez une rune,Select a rune
+glossary,Glossaire,Glossary
+pwr,PWR : ,PWR : 
+pwrg,PWRG : ,PWRG : 
 current_pwr,PWRactuel : ,CurrentPWR : 
+current_pwrg,PWRGactuel : ,CurrentPWRG : 
 max_pwr,PWRmaxi : ,MaxPWR : 
-stat_state,Etat Jet : ,Stat state : 
+max_pwrg,PWRGmaxi : ,MaxPWRG : 
+pwr_state,Etat PWR : ,PWR state : 
 pwrg_state,Etat PWRG : ,PWRG state : 
+pwr_long,Poid rune,Rune weight
+pwrg_long,Poid objet,Item weight
+current_pwr_long,Poid rune actuel,Current rune weight
+current_pwrg_long,Poid objet actuel,Current item weight
+max_pwr_long,Poid rune maximal,Maximum rune weight
+max_pwrg_long,Poid objet maximal,Maximum item weight
+pwr_state_long,% jet actuel pour rune,% current stat for rune
+pwrg_state_long,% jets actuels pour objet,% current stats for item
+cs_long,Succès critique,Critical success
+ns_long,Succès neutre,Neutral success
+cf_long,Echec critique,Critical failure
 cs,SC,CS
 ns,SN,NS
 cf,EC,CF
-current_pwrg,PWRGactuel : ,CurrentPWRG : 
-pwr,PWR : ,PWR : 
-pwrg,PWRG : ,PWRG : 
 bonus,Bonus : +,Bonus : +
 sink_reset,Puits remit à Zéro !,Sink reset to zero !
 item_creation,Création d'un Objet,Item creation
@@ -75,7 +88,6 @@ current,Actuel,Current
 stat_max_one_1,Pour les jets dont le maximum ,For the stats with a maximum 
 stat_max_one_2,est 1 laisser Min = 0 Max = 1 ,of 1 leave Min = 0 Max = 1
 submit,Valider,Submit
-max_pwrg,PWRGmaximal : ,MaxPWRG : 
 name_item,Nommez votre objet,Name your item
 language_message_1,L'objet a été sauvegardé en ,The item has been saved in 
 language_message_2, veuillez réessayer apres le reset de l'interface, please try again after the interface reset

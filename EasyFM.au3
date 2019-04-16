@@ -102,6 +102,7 @@ Func GUI()
 	$SubMenuLangue1 = GUICtrlCreateMenuItem(StringWithKey("french"), $MenuLangue)
 	$SubMenuLangue2 = GUICtrlCreateMenuItem(StringWithKey("english"), $MenuLangue)
 	$MenuAide = GUICtrlCreateMenu(StringWithKey("help"))
+	$SubMenuAide1 = GUICtrlCreateMenuItem(StringWithKey("glossary"), $MenuAide)
 	$SubMenuAide2 = GUICtrlCreateMenuItem(StringWithKey("report_bug"), $MenuAide)
 	$SubMenuAide3 = GUICtrlCreateMenuItem(StringWithKey("about"), $MenuAide)
 
@@ -247,6 +248,19 @@ Func GUI()
 			Case $msg = $SubMenuNouveau4
 				$AskQuit = MsgBox(3, StringWithKey("close_app"), StringWithKey("confirm_quit"))
 				If $AskQuit = 6 Then Exit
+			Case $msg = $SubMenuAide1
+			    $message = StringWithKey("cs") & " : " & StringWithKey("cs_long") & @CRLF
+				$message = $message & StringWithKey("ns") & " : " & StringWithKey("ns_long") & @CRLF
+				$message = $message & StringWithKey("cf") & " : " & StringWithKey("cf_long") & @CRLF
+			    $message = $message & StringWithKey("pwr") & StringWithKey("pwr_long") & @CRLF
+				$message = $message & StringWithKey("pwrg") & StringWithKey("pwrg_long") & @CRLF
+				$message = $message & StringWithKey("current_pwr") & StringWithKey("current_pwr_long") & @CRLF
+				$message = $message & StringWithKey("current_pwrg") & StringWithKey("current_pwrg_long") & @CRLF
+				$message = $message & StringWithKey("max_pwr") & StringWithKey("max_pwr_long") & @CRLF
+				$message = $message & StringWithKey("max_pwrg") & StringWithKey("max_pwrg_long") & @CRLF
+				$message = $message & StringWithKey("pwr_state") & StringWithKey("pwr_state_long") & @CRLF
+				$message = $message & StringWithKey("pwrg_state") & StringWithKey("pwrg_state_long") & @CRLF
+			    MsgBox(0, StringWithKey("glossary"), $message)
 			Case $msg = $SubMenuAide2
 				ShellExecute("https://github.com/hoboris/EasyFM/issues")
 			Case $msg = $SubMenuAide3
@@ -600,11 +614,11 @@ Func DisplayAnnexe($tmp)
 	GUICtrlSetData($Annexe[2], StringWithKey("current_pwr") & Round(Number($Item[$ZIndex][1])))
 	GUICtrlSetData($Annexe[3], StringWithKey("max_pwr") & Number($Item[$ZIndex][3]) * Number($Item[$ZIndex][4]))
 	If $Item[$ZIndex][0] <> 0 Then
-		GUICtrlSetData($Annexe[5], StringWithKey("stat_state") & Round((Number($Item[$ZIndex][0]) - Number($Item[$ZIndex][2])) / (Number($Item[$ZIndex][3]) - Number($Item[$ZIndex][2])) * 100) & "%")
+		GUICtrlSetData($Annexe[5], StringWithKey("pwr_state") & Round((Number($Item[$ZIndex][0]) - Number($Item[$ZIndex][2])) / (Number($Item[$ZIndex][3]) - Number($Item[$ZIndex][2])) * 100) & "%")
 		GUICtrlSetData($Annexe[4], StringWithKey("pwrg_state") & Round(GetPWRGactuel(False) / GetPWRGmax() * 100) & "%")
 	Else
 		GUICtrlSetData($Annexe[4], StringWithKey("pwrg_state") & "0%")
-		GUICtrlSetData($Annexe[5], StringWithKey("stat_state") & "0%")
+		GUICtrlSetData($Annexe[5], StringWithKey("pwr_state") & "0%")
 	EndIf
 	GUICtrlSetData($Annexe[6], StringWithKey("cs") & " : " & $PercentSC & "%")
 	GUICtrlSetData($Annexe[7], StringWithKey("ns") & " : " & $PercentSN & "%")
